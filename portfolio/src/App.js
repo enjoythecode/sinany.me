@@ -7,12 +7,14 @@ function Break() {
 		</span>
 	)
 }
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <p>
-			Hey, I'm Sinan. I was a Software Engineer Intern at Google, and I'll gradute Colby College in May 2023.
+	  		<span id="header-top">
+			<span className="rainbow-text">Hey, I'm Sinan</span> </span><br/> I worked as a <a>Software Engineer Intern at Google</a>, and I'll gradute <a>Colby College</a> in May 2023.
 			<Break/>
 	  		I'm a passionate and curious software engineer. I enjoy designing and implementing systems that churn data.
 			<Break/>
