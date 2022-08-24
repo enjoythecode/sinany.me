@@ -4,22 +4,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
 			<p id="header-top">
 				<span className="rainbow-text">Hey, I'm Sinan</span>
 			</p>
 
-			<p id="header-second">
-	  		<ol>
-				<li>I was a <a>Software Engineer Intern at Google</a></li>
-	  			<li>I'll gradute <a>Colby College</a> in May 2023</li>
-				<li>I'm coding <a>strate.gg</a> as my hobby project</li>
+			<p className="header-second">
+	  		<ol className="no-margin">
+				<li>I was a <span className="fake-link" href="#google-intern">Software Engineering Intern at Google</span></li>
+	  			<li>I'll gradute <span className="fake-link" href="#education-colby">Colby College</span> in May 2023</li>
+				<li>I'm coding <span className="fake-link" href="#projects-strategg">strate.gg</span> as a hobby project</li>
 	  		</ol>
-
+	  </p>
+		<p className="header-second">
 		I'm looking to join a company using data in exciting ways.<br/>
-		See a copy of my resume, and shoot me an email?
+		Check out my <a href="/Sinan_Yumurtaci_Resume.pdf">resume</a>, and <a href="mailto:sinan.yumurtaci@gmail.com">let's chat</a>!
 			</p>
-        </p>
       </header>
     </div>
   );

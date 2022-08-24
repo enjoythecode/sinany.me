@@ -12,7 +12,7 @@
   align-items: left;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-	color: #eee;
+	color: #ddd;
 }
 
 .App-link {
@@ -23,16 +23,31 @@ a {
 	font-weight: bold;
 }
 
-#header-top {
-	font-size: 4rem;
+a, .fake-link {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: #5b73df;
 }
 
-#header-second {
+.no-margin {
+	margin: 0;
+}
+
+#header-top {
+	font-size: 5rem;
+	font-weight: 500;
+	margin: 0;
+	margin-bottom: 4rem;
+}
+
+.header-second {
 	font-size: 2.5rem;
 	line-height: 2;
+	margin: 0;
+	margin-bottom: 4rem;
 }
 
-/* modified from https://dev.to/gmeben/animating-gradients-with-pure-css-3bi8*/
+/* modified from https://dev.to/gmeben/*/
 /* TODO: browser compatibility? */
 .rainbow-text {
   animation: animateSinan 10s linear infinite;
