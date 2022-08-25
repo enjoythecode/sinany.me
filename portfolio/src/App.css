@@ -22,7 +22,7 @@ a {
 a, .fake-link {
 	color: inherit;
 	text-decoration: underline;
-	text-decoration-color: #5b73df;
+	animation: animateRainbowUnderline 10s linear infinite;
 }
 
 .no-margin {
@@ -38,7 +38,7 @@ ol li {
 }
 ol li:before {
   content: counter(muffins) ". ";
-  color: #999;
+  color: #666;
 }
 ol {
   list-style: none;
@@ -75,10 +75,21 @@ ol {
   100% { background-position: 100% 0%; }
 }
 
+@keyframes animateRainbowUnderline {
+	0% {text-decoration-color: #cf5c5c}
+	10% {text-decoration-color: #c19b4a}
+	20% {text-decoration-color: #def2a0}
+	30% {text-decoration-color: #c6ee4a}
+	40% {text-decoration-color: #42eca6}
+	50% {text-decoration-color: #64b3d9}
+	60% {text-decoration-color: #208ea2}
+	70% {text-decoration-color: #498ada}
+	80% {text-decoration-color: #5b73df}
+	90% {text-decoration-color: #897ed3}
+	100% {text-decoration-color: #cf5c5c}
+}
+
 .hidden-text{
 	color: #666;
 	font-size: 4rem;
 }
-
-
-
