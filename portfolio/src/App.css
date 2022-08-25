@@ -1,5 +1,5 @@
 html {
-  font-size: calc(4px + 3vmin);
+  font-size: calc(4px + 2.5vmin);
 }
 .App {
   background-color: #282c34;
@@ -62,7 +62,6 @@ ol {
 	font-size: 1.5rem;
 	line-height: 2;
 	margin: 0;
-	margin-bottom: 2rem;
 }
 
 /* modified from https://dev.to/gmeben/*/
@@ -81,6 +80,30 @@ ol {
   100% { background-position: 100% 0%; }
 }
 
+.rainbow-box {
+	border: white 3px solid;
+	animation: animateRainbowBorderColor 10s linear infinite;
+	display: inline-block;
+}
+
+.rainbow-box > p {
+	padding: 0.6rem;
+	text-align: center;
+}
+
+@keyframes animateRainbowBorderColor {
+	0% {border-color: #cf5c5c}
+	10% {border-color: #c19b4a}
+	20% {border-color: #def2a0}
+	30% {border-color: #c6ee4a}
+	40% {border-color: #42eca6}
+	50% {border-color: #64b3d9}
+	60% {border-color: #208ea2}
+	70% {border-color: #498ada}
+	80% {border-color: #5b73df}
+	90% {border-color: #897ed3}
+	100% {border-color: #cf5c5c}
+}
 @keyframes animateRainbowUnderline {
 	0% {text-decoration-color: #cf5c5c}
 	10% {text-decoration-color: #c19b4a}
@@ -97,4 +120,9 @@ ol {
 
 .hidden-text{
 	color: #777;
+}
+
+.horizontal-center{
+	display: flex;
+	justify-content: center;
 }

@@ -15,10 +15,14 @@ function App() {
 				<li>I'm coding <span href="#projects-strategg">strate.gg</span> as a hobby project</li>
 			</ol>
 		</p>
-		<p className="header-second">
-			I'm looking to join a company using data in exciting ways.<br/>
-			Check out my <a href="/Sinan_Yumurtaci_Resume.pdf">resume</a>, and <a href="mailto:sinan.yumurtaci@gmail.com">let's chat!</a>
-		</p>
+		<div className="horizontal-center">
+			<div className="rainbow-box">
+				<p className="header-second">
+					I'm looking to join a company using data in exciting ways.<br/>
+					Check out my <a href="/Sinan_Yumurtaci_Resume.pdf">resume</a>, and <a href="mailto:sinan.yumurtaci@gmail.com">let's chat!</a>
+				</p>
+			</div>
+		</div>
       </header>
     </div>
   );
