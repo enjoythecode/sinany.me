@@ -33,6 +33,22 @@ a, .fake-link {
 	margin: 0;
 }
 
+/* Styling ordered list markers.
+ * Courtesy of:
+ * https://www.joshwcomeau.com/css/styling-ordered-lists-with-css-counters/
+ */
+ol li {
+  counter-increment: muffins
+}
+ol li:before {
+  content: counter(muffins) ". ";
+  color: #999;
+}
+ol {
+  list-style: none;
+  counter-reset: muffins;
+}
+
 #header-top {
 	font-size: 5rem;
 	font-weight: 500;
