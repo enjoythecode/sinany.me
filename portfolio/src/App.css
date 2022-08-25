@@ -15,10 +15,6 @@
 	color: #ddd;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 a {
 	font-weight: 600;
 }
@@ -79,6 +75,10 @@ ol {
   100% { background-position: 100% 0%; }
 }
 
+.hidden-text{
+	color: #666;
+	font-size: 4rem;
+}
 
 
 
