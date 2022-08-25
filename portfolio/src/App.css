@@ -17,9 +17,6 @@
 
 a {
 	font-weight: 600;
-}
-
-a, .fake-link {
 	color: inherit;
 	text-decoration: underline;
 	animation: animateRainbowUnderline 10s linear infinite;
