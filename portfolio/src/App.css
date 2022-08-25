@@ -1,5 +1,5 @@
 html {
-  font-size: calc(10px + 2vmin);
+  font-size: calc(4px + 3vmin);
 }
 .App {
   background-color: #282c34;
@@ -46,6 +46,7 @@ ol li:before {
   width: 100vw;
 }
 ol {
+  padding: 0;
   list-style: none;
   counter-reset: muffins;
 }

@@ -17,7 +17,7 @@ function App() {
 		</p>
 		<p className="header-second">
 			I'm looking to join a company using data in exciting ways.<br/>
-			Check out my <a href="/Sinan_Yumurtaci_Resume.pdf">resume</a>, and <a href="mailto:sinan.yumurtaci@gmail.com">let's chat</a>!
+			Check out my <a href="/Sinan_Yumurtaci_Resume.pdf">resume</a>, and <a href="mailto:sinan.yumurtaci@gmail.com">let's chat!</a>
 		</p>
       </header>
     </div>
