@@ -1,5 +1,4 @@
-# Hi, I'm Sinan, and [this is my portfolio](https://sinany.me) and
-[resume](https://sinany.me/Sinan_Yumurtaci_Resume.pdf)
+# Hi, I'm Sinan, and [this is my portfolio](https://sinany.me) and [resume](https://sinany.me/Sinan_Yumurtaci_Resume.pdf)
 
 ## Development Instructions
 
