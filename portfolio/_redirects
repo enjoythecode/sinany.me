@@ -1,0 +1,6 @@
+# Netlify Redirects file
+# Netlify documentation: https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file
+# tutorial I used: https://www.freecodecamp.org/news/how-to-deploy-react-router-based-app-to-netlify/
+
+# Redirect all paths to index.html, which contains the react router code to display the correct file!
+/* /index.html 200
