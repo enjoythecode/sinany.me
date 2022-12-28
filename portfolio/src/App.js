@@ -5,17 +5,18 @@ function App() {
 	<div className="App">
 		<header className="App-header">
 		<div>
-			<p id="header-top">
-				<span className="rainbow-text">Hey, I'm Sinan</span><span className="hidden-text">, and this is a bit about me</span>
+			<p id="header-top" className="narrow">
+				<span className="rainbow-text">Hey, I'm Sinan!</span> <span className="hidden-text"> I am a software engineering student graduating this May 2023</span>
 			</p>
 
-				<p className="header-second">
-				<ol className="no-margin">
-					<li>I was a <span href="#google-intern">Software Engineering Intern at Google</span></li>
-					<li>I'll graduate <span href="#education-colby">Colby College</span> in May 2023</li>
-					<li>I'm coding <span href="#projects-strategg">strate.gg</span> as a hobby project</li>
-				</ol>
+			<p className="highlight-paragraph narrow">
+				I <span class="rainbow-text">interned at Google</span> last summer, using <span className="skill">Java</span> and <span className="skill">Go</span> to help build a knowledge graph with trillions of data points. 
 			</p>
+
+			<p className="highlight-paragraph narrow">
+				I'm developing a <span class="rainbow-text">real-time strategy game website</span> using <span className="skill">Python (Flask)</span> and <span className="skill">Javascript (React)</span>.
+			</p>
+
 		</div>
 		<div className="horizontal-right">
 			<div className="rainbow-box">

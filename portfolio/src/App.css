@@ -1,5 +1,5 @@
 html {
-  font-size: calc(4px + 2.5vmin);
+  font-size: max(1em, calc(12px + 2.5vmin));
 }
 .App {
   background-color: #282c34;
@@ -14,7 +14,7 @@ html {
   flex-direction: column;
   align-items: left;
   justify-content: space-evenly;
-  color: #ddd;
+  color: #ccc;
 }
 
 a {
@@ -28,39 +28,26 @@ a {
 	margin: 0;
 }
 
-/* Styling ordered list markers.
- * Courtesy of:
- * https://www.joshwcomeau.com/css/styling-ordered-lists-with-css-counters/
- */
-ol li {
-  counter-increment: muffins
-}
-ol li:before {
-  content: counter(muffins) ". ";
-  animation: animateSinan 10s linear infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right,#cf5c5c,#c19b4a,#def2a0,#c6ee4a,#42eca6,#64b3d9,#208ea2,#498ada,#5b73df,#897ed3,#cf5c5c,#c19b4a);
-  background-size: 1100% 1000%;
-  height: 100vh;
-  width: 100vw;
-}
-ol {
-  padding: 0;
-  list-style: none;
-  counter-reset: muffins;
+.narrow {
+	/* 90vw, but not wider than 700px */
+	width: min(90vw, 700px);
 }
 
 #header-top {
-	font-size: 2.3rem;
+	font-size: calc(20px + 4vmin);
 	font-weight: 600;
 	margin: 0;
 }
 
-.header-second {
-	font-size: 1.5rem;
-	line-height: 2;
+.skill {
+	font-weight: bold;
+}
+
+.highlight-paragraph {
+
+	line-height: 1.2;
 	margin: 0;
+	margin-top: 1.4em;
 }
 
 /* modified from https://dev.to/gmeben/*/
@@ -118,7 +105,7 @@ ol {
 }
 
 .hidden-text{
-	color: #777;
+	color: rgb(158, 158, 158);
 	font-weight: 400;
 }
 
