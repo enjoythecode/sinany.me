@@ -33,8 +33,13 @@ a {
 	width: min(90vw, 700px);
 }
 
-#header-top {
+h1 {
 	font-size: calc(20px + 4vmin);
+	font-weight: 600;
+	margin: 0;
+}
+h2 {
+	font-size: calc(16px + 3vmin);
 	font-weight: 600;
 	margin: 0;
 }
