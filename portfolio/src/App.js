@@ -27,7 +27,7 @@ function App() {
 
 		Bash: "Bash",
 	}
-	const resume = {
+	/*const resume = {
 		"experience": {
 			"google":
 			{
@@ -35,7 +35,7 @@ function App() {
 				"skills": [SKILL.Java, SKILL.Go, SKILL.Bash, SKILL.GoogleCloud, SKILL.PerformanceOptimization, SKILL.Git,]
 			}
 		}
-	};
+	};*/
 
 
   return (
