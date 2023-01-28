@@ -1,23 +1,30 @@
 html {
-  font-size: max(1em, calc(12px + 2.5vmin));
+	color: #ccc;
+	background-color: #282c34;
+	font-size: max(1em, calc(8px + 2.2vmin));
 }
+
+.hidden {
+	display: none;
+}
+
 .App {
-  background-color: #282c34;
   min-height: 100vh;
-}
-
-.App-header {
-  min-height: 100vh;
-  width: 90vw;
   padding-left: 5vw;
+  margin-bottom: 1rem;
   display: flex;
-  flex-direction: column;
   align-items: left;
-  justify-content: space-evenly;
-  color: #ccc;
+  flex-direction: column;
 }
 
-a {
+.App-landing {
+  font-size: max(1em, calc(12px + 2.5vmin));
+  width: 80vw;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+a.rainbow-link{
 	font-weight: 500;
 	color: inherit;
 	text-decoration: underline;
@@ -48,16 +55,26 @@ h2 {
 	font-weight: bold;
 }
 
-.highlight-paragraph {
+.resume-item{
+	border-left: white 3px solid;
+	animation: animateRainbowBorderColor 10s linear infinite;
+	display: inline-block;
+	margin: 0;
+	padding-left: 0.5rem;
+	margin-bottom: 2.4rem;
+}
 
+
+.resume-item > p {
 	line-height: 1.2;
 	margin: 0;
-	margin-top: 1.4em;
+
 }
 
 /* modified from https://dev.to/gmeben/*/
 /* TODO: browser compatibility? */
-.rainbow-text {
+.rainbow-text,
+.resume-item:hover .resume-item-cta{
   animation: animateSinan 10s linear infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -69,17 +86,6 @@ h2 {
 @keyframes animateSinan {
   0% { background-position: 0% 0%; }
   100% { background-position: 100% 0%; }
-}
-
-.rainbow-box {
-	border-right: white 3px solid;
-	animation: animateRainbowBorderColor 10s linear infinite;
-	display: inline-block;
-}
-
-.rainbow-box > p {
-	padding: 0rem 0.6rem;
-	text-align: right;
 }
 
 @keyframes animateRainbowBorderColor {
