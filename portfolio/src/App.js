@@ -62,12 +62,14 @@ function App() {
 				<span className="hidden-text">I improved the efficiency of their development tooling by 30%, among multiple other contributions.</span>
 			</p>
 			
-			<div className="hidden">
+			{/*
+			<div>
 			<br/>
 				<a>
 					<span className="resume-item-cta"><i>click to learn more »</i></span>
 				</a>
 			</div>
+			*/}
 		</div>
 
 		<div className="resume-item narrow">
