@@ -2,7 +2,7 @@ import './App.css';
 
 function App() {
 
-	const EXPERIENCE_TYPE = {
+	/*const EXPERIENCE_TYPE = {
 		Employment: "Employment",
 		Project: "Project",
 	}
@@ -27,7 +27,7 @@ function App() {
 
 		Bash: "Bash",
 	}
-	/*const resume = {
+	const resume = {
 		"experience": {
 			"google":
 			{
@@ -59,7 +59,7 @@ function App() {
 				I interned at <span className="rainbow-text">Google</span> last summer, helping Data Commons develop a knowledge graph of over a billion time series.
 				<br/>
 				<br/>
-				<span className="hidden-text">I improved the efficiency of their development processes by 30%, among multiple other contributions.</span>
+				<span className="hidden-text">I improved the efficiency of their development tooling by 30%, among multiple other contributions.</span>
 			</p>
 			
 			<div className="hidden">
