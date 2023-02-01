@@ -54,7 +54,7 @@
 	\vspace*{-10pt}
 	\begin{center}
 		{\Large \textbf {Sinan Yumurtacı}}\\
-		 syumur23@colby.edu $\cdot$ (207) 313-6290 $\cdot$
+		sinan.yumurtaci@gmail.com $\cdot$ (207) 313-6290 $\cdot$
 	  \href{https://linkedin.com/in/sinanyumurtaci}{linkedin.com/in/sinanyumurtaci} $\cdot$ 
 	  \href{https://github.com/enjoythecode}{github.com/enjoythecode}
 	\end{center}
@@ -64,16 +64,26 @@
 \newcommand{\concreteeducation}{
 	\header{Education}
 	\textbf{Colby College}\hfill Waterville, ME\\
-	GPA: 4.02, Class Rank: 21, Presidential Scholar \hfill September 2019 - May 2023\\
+	GPA: 4.00, Class Rank: 21, Presidential Scholar \hfill September 2019 - May 2023\\
 	Bachelor of Arts; Major in Computer Science with a Minor in Economics \\
 }
 
 % === Skills
-\newcommand{\concreteskills}{
+\newcommand{\concreteskillsbyproficiency}{
 	\header{Technical Skills}
 	\textbf{Proficient} -- Python, Java, JavaScript, React, Jest, Flask, MATLAB, vim\\
 	\textbf{Familiar}\hspace{2.82mm} -- Go, MobX, Typescript, Google Cloud Platform, JUnit, pytest, Docker, SQL, PHP\\
 }
+
+% === Skills
+\newcommand{\concreteskillsbycategory}{
+	\header{Technical Skills}
+	\textbf{Languages} -- Python, JavaScript, React, HTML/CSS, Java, Go, MATLAB, SQL\\
+	\textbf{Frameworks} -- React, Flask, MATLAB, \\
+	\textbf{Developer Tools} -- Git, Docker, Docker Compose, Google Cloud Platform, Unity 3D\\
+	\textbf{Libraries} --  Jest, pytest, NumPy, pandas, Matplotlib\\
+}
+
 
 \newcommand{\concretegoogleintern}{
 	\expheader{Google}{Mountain View, CA}{Software Engineering Intern}{May 2022 - August 2022}
@@ -143,9 +153,13 @@
 	\vspace{-1mm}
 
 	\concretegoogleintern
+	\vspace{-1mm}
 	\concreteninetyeightpointsix
+	\vspace{-1mm}
 	\concretecsra
+	\vspace{-1mm}
 	\concretecolbyca
+	\vspace{-1mm}
 
 
 	% SCRAPPED FOR SPACE
@@ -191,9 +205,10 @@
 }
 
 \newcommand{\concretestrategg}{
-	\expheader{Real-time Multiplayer Strategy Board Game Website}{strate.gg}{Python, Javascript, React, MobX, Jest, pytest, Docker}{}
+	\expheader{Real-time Multiplayer Strategy Board Game Website}{strate.gg}{JavaScript, React, MobX, Jest, Python, pytest, Redis, Docker, Bash}{}
 	\begin{itemize} \itemsep 0pt
-	\item Implemented real-time online gameplay of the abstract strategy board game Amazons using React and MobX for a composable front-end and Python Flask for back-end\\
+	\item Implementing real-time abstract strategy game server and website using Javcript, React, MobX, Python, Flask, and Redis\\
+	\item Automated CI/CD pipeline with testing, linting, and deployment using Docker, Docker Compose, Bash, and Makefile.
 	\end{itemize}
 }
 % === Projects
@@ -202,7 +217,8 @@
 	\vspace{-1mm}
 
 	\concreteduobulnet
-	\vspace{2mm}
+	\vspace{-1mm}
+	%\vspace{2mm}
 	\concretestrategg
 
 	% SCRAPPED FOR SPACE
@@ -221,11 +237,11 @@
 
 \concreteprofile
 \concreteeducation
-\vspace{2mm}
+\vspace{1mm}
 \concreteexperience
-\vspace{2mm}
+\vspace{1mm}
 \concreteprojects
-\vspace{2mm}
-\concreteskills
+\vspace{1mm}
+\concreteskillsbycategory
 
 \end{document}
