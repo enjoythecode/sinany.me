@@ -10,4 +10,5 @@ dev: deps
 	(cd portfolio && npm start)
 
 resume:
-	pdflatex resume/resume.tex
+	(cd resume && pdflatex resume.tex)
+
