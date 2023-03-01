@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import StartPage from './StartPage';
+import BlogHome from './BlogHome';
+import Art from './Art';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,9 +12,10 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="start" element={<StartPage />} />
+        <Route path="/blog" element={<BlogHome />} />
+        <Route path="/art" element={<Art />} />
         <Route path="/" element={<App />} />
-	  <Route path="*" element={<App />} />
+	      <Route path="*" element={<App />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
