@@ -1,0 +1,92 @@
+.amazonsBoard {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  position: relative;
+}
+
+.amazonsPiece {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+}
+
+.cellDark {
+  background-color: #946f51;
+}
+
+.cellLight {
+  background-color: #f0d9b5;
+}
+
+.cellDark.indicatorLastMove {
+  background: radial-gradient(
+    circle at 50% 50%,
+    #946f51 80%,
+    rgba(10, 10, 14, 0.87) 80%
+  );
+}
+.cellLight.indicatorLastMove {
+  background: radial-gradient(
+    circle at 50% 50%,
+    #f0d9b5 80%,
+    rgba(10, 10, 14, 0.87) 80%
+  );
+}
+
+.cellDark.indicatorPrimary.indicatorInner {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(125, 131, 206, 0.87) 20%,
+    #946f51 20%
+  );
+}
+.cellDark.indicatorPrimary.indicatorOuter {
+  background: radial-gradient(
+    circle at 50% 50%,
+    #946f51 80%,
+    rgba(125, 131, 206, 0.87) 80%
+  );
+}
+.cellDark.indicatorSecondary.indicatorInner {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(206, 125, 125, 0.87) 20%,
+    #946f51 20%
+  );
+}
+.cellDark.indicatorSecondary.indicatorOuter {
+  background: radial-gradient(
+    circle at 50% 50%,
+    #946f51 80%,
+    rgba(206, 125, 125, 0.87) 80%
+  );
+}
+
+.cellLight.indicatorPrimary.indicatorInner {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(125, 131, 206, 0.87) 20%,
+    #f0d9b5 20%
+  );
+}
+.cellLight.indicatorPrimary.indicatorOuter {
+  background: radial-gradient(
+    circle at 50% 50%,
+    #f0d9b5 80%,
+    rgba(125, 131, 206, 0.87) 80%
+  );
+}
+.cellLight.indicatorSecondary.indicatorInner {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(206, 125, 125, 0.87) 20%,
+    #f0d9b5 20%
+  );
+}
+.cellLight.indicatorSecondary.indicatorOuter {
+  background: radial-gradient(
+    circle at 50% 50%,
+    #f0d9b5 80%,
+    rgba(206, 125, 125, 0.87) 80%
+  );
+}
