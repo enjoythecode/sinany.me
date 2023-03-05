@@ -1,5 +1,7 @@
 import LearnAmazons from "./posts/LearnAmazons.mdx"
+import "./blog.css"
 import { useLoaderData } from "react-router-dom"
+import Header from "../components/header.js"
 
 const blogposts = {
     "learn-amazons": LearnAmazons,
@@ -16,7 +18,12 @@ function Blog() {
     let blogpost = useLoaderData();
     return (
       <div>
-            {blogpost()}
+        <Header/>
+        <div className="vertical-center-child-div">
+          <div className="narrow">
+                {blogpost()}
+          </div>
+        </div>
       </div>
     );
   }

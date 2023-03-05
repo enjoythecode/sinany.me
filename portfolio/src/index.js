@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import reportWebVitals from './reportWebVitals';
+
 import Portfolio from './Portfolio';
 import Art from './Art';
 import Blog, { blogPostLoader } from './blog/Blog.js';
-import reportWebVitals from './reportWebVitals';
+
+import './index.css';
 
 /*  
   Router modeled after example provided in the react-router repo:

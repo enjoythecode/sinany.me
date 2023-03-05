@@ -11,3 +11,71 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html {
+	color: #ccc;
+	background-color: #282c34;
+	font-size: max(1em, calc(8px + 2.2vmin));
+}
+
+.hidden {
+	display: none;
+}
+
+.narrow {
+	/* 90vw, but not wider than 700px */
+	width: min(90vw, 700px);
+}
+
+
+
+.vertical-center-child-div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+/* modified from https://dev.to/gmeben/*/
+/* TODO: browser compatibility? */
+.rainbow-text,
+.resume-item:hover .resume-item-cta{
+  animation: animateSinan 10s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right,#cf5c5c,#c19b4a,#def2a0,#c6ee4a,#42eca6,#64b3d9,#208ea2,#498ada,#5b73df,#897ed3,#cf5c5c,#c19b4a);
+  background-size: 1100% 1000%;
+  height: 100vh;
+  width: 100vw;
+}
+@keyframes animateSinan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
+}
+
+@keyframes animateRainbowBorderColor {
+	0% {border-color: #cf5c5c}
+	10% {border-color: #c19b4a}
+	20% {border-color: #def2a0}
+	30% {border-color: #c6ee4a}
+	40% {border-color: #42eca6}
+	50% {border-color: #64b3d9}
+	60% {border-color: #208ea2}
+	70% {border-color: #498ada}
+	80% {border-color: #5b73df}
+	90% {border-color: #897ed3}
+	100% {border-color: #cf5c5c}
+}
+@keyframes animateRainbowUnderline {
+	0% {text-decoration-color: #cf5c5c}
+	10% {text-decoration-color: #c19b4a}
+	20% {text-decoration-color: #def2a0}
+	30% {text-decoration-color: #c6ee4a}
+	40% {text-decoration-color: #42eca6}
+	50% {text-decoration-color: #64b3d9}
+	60% {text-decoration-color: #208ea2}
+	70% {text-decoration-color: #498ada}
+	80% {text-decoration-color: #5b73df}
+	90% {text-decoration-color: #897ed3}
+	100% {text-decoration-color: #cf5c5c}
+}

@@ -39,8 +39,8 @@ function Portfolio() {
 
 
   return (
-	<div className="App">
-		<header className="App-landing">
+	<div className="Portfolio">
+		<div className="Portfolio-landing">
 			<div>
 				<h1>
 					<span className="rainbow-text">Hi, I'm Sinan! </span> 
@@ -51,7 +51,7 @@ function Portfolio() {
 				<p><span>I am  graduating May 2023; {/*<br style={{"marginBottom": "0.6em"}}/>*/}
 					check out my <a className="rainbow-link" href="/Sinan_Yumurtaci_Resume.pdf">resume</a> (or read below), and <a className="rainbow-link" href="mailto:sinan.yumurtaci@gmail.com">let's chat!</a></span></p>
 			</div>
-		</header>
+		</div>
 
 
 		<div className="resume-item narrow">
