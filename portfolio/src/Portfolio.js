@@ -1,6 +1,6 @@
-import './App.css';
+import './Portfolio.css';
 
-function App() {
+function Portfolio() {
 
 	/*const EXPERIENCE_TYPE = {
 		Employment: "Employment",
@@ -100,4 +100,4 @@ function App() {
   );
 }
 
-export default App;
+export default Portfolio;

@@ -1,23 +1,28 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Portfolio from './Portfolio';
 import Art from './Art';
-import LearnAmazons from './blog/LearnAmazons.js';
+import Blog, { blogPostLoader } from './blog/Blog.js';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+/*  
+  Router modeled after example provided in the react-router repo:
+  https://github.com/remix-run/react-router/tree/dev/examples/data-router
+*/
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route>
+    <Route path="/blog/:id" element={<Blog />} loader={ blogPostLoader }/>
+    <Route path="/art" element={<Art />} />
+    <Route path="/" element={<Portfolio />} />
+  </Route>
+));
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/blog" element={<LearnAmazons />} />
-        <Route path="/art" element={<Art />} />
-        <Route path="/" element={<App />} />
-	      <Route path="*" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

@@ -1,11 +1,9 @@
-import Content from "./LearnAmazons.mdx"
+import Content from "./posts/LearnAmazons.mdx"
 
 function LearnAmazons() {
     return (
       <div>
-          <h2>some other text</h2>
           <Content/>
-  
       </div>
     );
   }
