@@ -12,7 +12,7 @@
     \textheight=10in
     \pagestyle{empty}
     \raggedright
-    \usepackage[left=0.7in, right=0.7in, top=0.5in, bottom=0.5in]{geometry}
+    \usepackage[left=0.7in, right=0.7in, top=0.5in, bottom=0.75in]{geometry}
     \setlist[itemize,1]{leftmargin=\dimexpr 12pt}
     \hypersetup{colorlinks=true,urlcolor=black}
 
@@ -41,7 +41,6 @@
 % 3: Title
 % 4: Time
 \newcommand{\expheader}[4]{
-    \vspace{2mm}
     \textbf{#1 \hfill #2}\\
     #3 \hfill #4\\
     \vspace{-2mm}
@@ -79,11 +78,11 @@
 	\header{Technical Skills}
 	\textbf{Languages} -- Python, JavaScript, HTML/CSS, Java, Go, MATLAB, Shell
 	Scripting, SQL\\
+	\textbf{Frameworks} -- React, Jest, Flask, pytest, MobX\\
 	\textbf{Developer Tools} -- Git, Docker, Docker Compose, Google Cloud
 	Platform, Jupyter Notebook\\
-	\textbf{Frameworks} -- React, Jest, Flask, pytest\\
-	\textbf{Libraries} --  NumPy, pandas, Matplotlib\\
-	\textbf{Other} --  Google Earth Engine, Unity 3D\\
+	\textbf{Libraries} -- NumPy, pandas, Matplotlib\\
+	\textbf{Other} -- Google Earth Engine, Unity 3D, Processing, vim\\
 }
 
 
@@ -93,6 +92,7 @@
 
 		Worked on a developer tool that validates billions of time-series statistics in the Data Commons knowledge graph.
 		% previously: Delivered vital improvements to a business-critical data validation tool responsible for all additions to the Data Commons knowledge graph of over 2 trillion triples.
+    \vspace{-2mm}
 
 	\begin{itemize} \itemsep 0pt
 		\item Improved data validation and processing speed 30\% by analyzing flame graphs of runtime performance and engineering optimizations in Java
@@ -154,16 +154,13 @@
 % === Experience
 \newcommand{\concreteexperience}{
 	\header{Experience}
-	\vspace{-1mm}
-
 	\concretegoogleintern
-	\vspace{-1mm}
+	\vspace{-2mm}
 	\concreteninetyeightpointsix
-	\vspace{-1mm}
+	\vspace{-2mm}
 	\concretecsra
-	\vspace{-1mm}
+	\vspace{-2mm}
 	\concretecolbyca
-	\vspace{-1mm}
 
 
 	% SCRAPPED FOR SPACE
@@ -213,14 +210,12 @@
 	\expheader{Real-time Multiplayer Strategy Board Game Website}{strate.gg}{JavaScript, React, MobX, Jest, Python, pytest, Redis, Docker, Bash}{}
 	\begin{itemize} \itemsep 0pt
 	\item Implementing real-time strategy game server and website using JavaScript, React, MobX, Python, Flask, and Redis\\
-	\item Automated CI/CD pipeline with testing, linting, and deployment using Docker, Docker Compose, Bash, and Makefile.
+	\item Automated CI/CD pipeline with testing, linting, and deployment using Docker, Docker Compose, Bash, and Makefile
 	\end{itemize}
 }
 % === Projects
 \newcommand{\concreteprojects}{
 	\header{Projects}
-	\vspace{-1mm}
-
 	\concreteduobulnet
 	\vspace{-1mm}
 	%\vspace{2mm}
