@@ -18,8 +18,7 @@ function Blog() {
     let blogpost = useLoaderData();
     return (
       <div>
-        <Header/>
-        <div className="vertical-center-child-div">
+        <div className="vertical-center-child-div blog">
           <div className="narrow">
                 {blogpost()}
           </div>

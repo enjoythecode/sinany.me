@@ -1,13 +1,17 @@
 /* make the sub-heading be close to the heading */
-h1 {
-    font-weight:900;
+.blog h1 {
+    font-weight: 900;
 }
 
-h5 {
+.blog h5 {
     font-weight: 100;
     margin-top: 0;
     margin-bottom: 2rem;
     font-size: 1rem;
     font-style: italic;
     text-align: right;
+}
+
+.blog {
+    font-size: 22px;
 }
