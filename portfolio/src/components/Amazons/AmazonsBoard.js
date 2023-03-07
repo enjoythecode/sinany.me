@@ -9,4 +9,15 @@ const AmazonsBoard = () => {
     </div>
 }
 
+const SinglePlayerAmazonsBoard = () => {
+    const [game] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
+    const ExecuteAnyMove = (move) => {
+        game.apply_move(move);
+    }
+    return <div>
+        <AmazonsView game_state={game} handle_move={ExecuteAnyMove}></AmazonsView>
+    </div>
+}
+
 export default AmazonsBoard;
+export { SinglePlayerAmazonsBoard };
