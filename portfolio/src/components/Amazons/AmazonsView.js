@@ -1,5 +1,8 @@
 import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
+import wqueen from "../../assets/images/wqueen.png";
+import bqueen from "../../assets/images/bqueen.png"
+import fire from "../../assets/images/fire.png"
 
 import "./amazons.css";
 
@@ -11,16 +14,11 @@ const amazonsBoardDynamicGridRules = (x) => {
 };
 
 const preload_images = () => {
-  let preloadedImages = [];
   const imagesInAmazons = [
-    "/images/wqueen.png",
-    "/images/bqueen.png",
-    "/images/fire.png",
+    wqueen, bqueen, fire
   ];
-  imagesInAmazons.forEach((imageSrc) => {
-    let image = new Image();
-    image.src = imageSrc;
-    preloadedImages.push(image);
+  let preloadedImages = imagesInAmazons.map((imageSrc) => {
+    return <img src={imageSrc}></img>;
   });
 };
 
@@ -132,9 +130,7 @@ const AmazonsView = observer(({ game_state, handle_move, last_move }) => {
     for (let y = 0; y < game_state.config.size; y++) {
       if (game_state.board[x][y] !== 0) {
         let img_src = [
-          "/images/wqueen.png",
-          "/images/bqueen.png",
-          "/images/fire.png",
+          wqueen, bqueen, fire
         ][game_state.board[x][y] - 1];
         let img_alt = ["White Queen", "Black Queen", "Burnt Off Square"][
           game_state.board[x][y] - 1
