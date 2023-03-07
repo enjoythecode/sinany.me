@@ -1,7 +1,7 @@
 import LearnAmazons from "./posts/LearnAmazons.mdx"
 import "./blog.css"
 import { useLoaderData } from "react-router-dom"
-import Header from "../components/header.js"
+import Header from "../components/Header.js"
 
 const blogposts = {
     "learn-amazons": LearnAmazons,
