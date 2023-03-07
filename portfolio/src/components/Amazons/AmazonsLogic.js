@@ -24,9 +24,29 @@ const initializeBoard = (config) => {
   return startingBoards[key];
 };
 
-// TODO (Amazons general) change cell naming convention from "xy" to two integer arguments/parameters x and y!
-
 class AmazonsLogic {
+
+  apply_move = (move) => {
+    let from = move.from;
+    let to   = move.to;
+    let shoot= move.shoot;
+
+    let from_x = Number(from.toString()[0]);
+    let from_y = Number(from.toString()[1]);
+    let to_x = Number(to.toString()[0]);
+    let to_y = Number(to.toString()[1]);
+    let shoot_x = Number(shoot.toString()[0]);
+    let shoot_y = Number(shoot.toString()[1]);
+
+    let player_color = this.turn + 1;
+
+    this.board[from_x][from_y] = 0;
+    this.board[to_x][to_y] = player_color;
+    this.board[shoot_x][shoot_y] = 3;
+
+    this.setTurn((this.turn + 1) % 2) 
+  }
+
   constructor(challenge, config) {
     makeObservable(this, {
       board: observable,
