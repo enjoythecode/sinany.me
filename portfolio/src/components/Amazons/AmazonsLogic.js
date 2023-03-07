@@ -24,8 +24,6 @@ const initializeBoard = (config) => {
   return startingBoards[key];
 };
 
-// TODO (Amazons general) change cell naming convention from "xy" to two integer arguments/parameters x and y!
-
 class AmazonsLogic {
 
   apply_move = (move) => {
