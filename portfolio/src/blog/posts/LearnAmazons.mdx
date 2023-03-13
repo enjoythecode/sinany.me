@@ -4,7 +4,9 @@ import AmazonsBoard, { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard } from "..
 # <span className="rainbow-text">An Interactive Introduction to the Game of Amazons</span>
 ##### i love this niche strategy game, and i want to tell you about it
 
-# TODO: auto-add rainbow text to all headings
+TODO: auto-add rainbow text to all headings
+
+TODO: add auto-play GIF Amazons TV board
 
 <PlaybackAmazonsBoard></PlaybackAmazonsBoard>
 
@@ -13,17 +15,19 @@ import AmazonsBoard, { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard } from "..
 
 ## <span className="rainbow-text">Getting Started</span>
 
-Amazons is an abstract strategy game -- the same category of games like Chess and Go. However, it is *much* simpler to learn and get playing. The simple rules hide deep strategic complexity, and within 5 minutes, you'll be able to play the game and appreciate some intricate strategies!
+Amazons is an abstract strategy game -- in the same category of games as Chess and Go. However, it is *much* simpler to learn and get playing. The simple rules hide deep strategic complexity, and
+within 5 minutes, you'll be able to play the game and appreciate some of its intricate strategies!
 
 Here is the entirety of the rules for this game, in five bullet points;
 
+*TODO: add rainbow border here!*
 <b>
 1. Amazons is (most often) played on a 10x10 square grid.
 
 2. The two players (colored white and black) each control four pieces called Queens (or Amazons).
 
-3. Starting with the white player, players take turns moving one of their queens in an unobstructed horizontal, vertical, or diagonal path
-and then shoot at a square to which there is an unobstructed horizontal, vertical, or diagonal path.
+3. Starting with the white player, players take turns moving one of their queens in a valid path, and then shoot at another square from there over a valid path.
+A valid path is an  horizontal, vertical, or diagonal sequence of only empty squares.
 
 4. The squares that were shot at becomes a permanent obstruction for later moves and shots for both players.
 
@@ -32,38 +36,45 @@ and then shoot at a square to which there is an unobstructed horizontal, vertica
 
 ## Breaking the Rules Down
 
+Those are the rules, presented densely. I will now explain each bullet point with examples.
+You can also <a href="#playground" className="rainbow-link">skip ahead to the playground</a> if you'd like!
+
+TODO: write a component for putting content on the right half of the column 
+
 ### 1. The board
+
+TODO: talk about the board; coordinates, mention "chess-like"
 
 ### 2. The pieces
 
+TODO: show the initial configuration of pieces, tell that the icon is borrowed from chess [1]
+1: footnote: the idea to borrow the queen icon came from this Numberphile video (link to there)
+
 ### 3. Movement
 
+TODO: give starting board, but interactive! guide them through the first move; have them be able to control both players
 <div style={{"width": "300px"}}>
     <SinglePlayerAmazonsBoard></SinglePlayerAmazonsBoard>
 </div>
 
 ### 4. Blocked squares
 
+TODO: give a starting board with a few moves made. showcase how some arrows and queen positioning can be blockages
+
 ### 5. Winning!
 
+TODO: give a guaranteed win-in-2 moves board against the bot. bot makes their last possible move; and then sparkles and you win!
 
-That is the entirety of the rules, yet a lot of strategy unpacks from the fact that shooting a square is mandatory, which restricts the board until a player does not have any moves remaining and thus loses. Let's first unpack this definition step-by-step, and then discuss the strategic complexity of the game!
+## Playground <a name="playground"></a>
 
-- show starting board, piece configuration; prompt the player to choose a white queen to move with (clicking should show possible squares
+- TODO: have a openable summary of rules
+- TODO: have a openable basic strategy pointers / tips
+
+- TODO: game dashbord (player indication, list of moves, undo move, reset board)
+
+<AmazonsBoard></AmazonsBoard>
 
 ---
-
-- intro / hook paragraph
-
-- amazons explained, briefly
-
-- the board
-
-- the pieces
-
-- the win condition
-
-- let's play! (basic bot implementation!)
 
 - emergence in the rules of Amazons
 
@@ -75,24 +86,3 @@ That is the entirety of the rules, yet a lot of strategy unpacks from the fact t
     - articles about solving Amazons in smaller boards
     
 ---
-
-
-
-## Playground <a name="playground"></a>
-
-
-Choose one of your white queens, and move it to one of the highlighted available squares.
-
-Before finishing your move, you'll shoot an arrow from your destination to any square orthogonally or diagonally -- this will block that square from being moved over or shot over for the rest of the game. That is your first turn completed! Now you will alternate turns with your opponent until one player is unable to make a move. The last player to have made a move wins!
-
-basic strategy: try to aim your shots in front of the opponent queen to block their maneuvers while positioning your queens with plenty of area to move around!
-
-<AmazonsBoard></AmazonsBoard>
-
-
----
-
-## scratch
-
-
- They take alternating turns; each time moving one of their queens at least one space, and shooting an arrow at another square. Both of these actions must be over a path with no other pieces and previously-shot squares; and they can be any number of squares horizontally, vertically, or diagonally. One piece must move and shoot, in that order, exactly once per turn. The player who 

@@ -1,8 +1,9 @@
 import "./header.css"
 
 function Header() {
-    return (<header>
-        <a href="/">sinany.me</a>
+    return (
+    <header>
+        <a href="/" className="rainbow-link">sinany.me</a>
     </header>)}
 
 export default Header;
