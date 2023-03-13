@@ -19,6 +19,10 @@ const SinglePlayerAmazonsBoard = () => {
     </div>
 }
 
+const moveToText = (move) => {
+    return move.from + "-" + move.to + "/" + move.shoot;
+}
+
 const PlaybackAmazonsBoard = () => {
     const [game] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
     const [currMoveIndex, setCurrMoveIndex] = useState(0);
@@ -118,10 +122,60 @@ const PlaybackAmazonsBoard = () => {
         return () => clearTimeout(timer);
     }, [currMoveIndex, playing])
 
+    const DashboardPlayer = (props) => {
+        return (
+            <div>
+                <b>{props.name}</b>{props.isTurn ? "isTurn" : ""}
+            </div>
+        )
     
-    return <div>
-        <AmazonsView game_state={game} handle_move={ExecuteMove} last_move={currMoveIndex > 0 ? playbackMoves[currMoveIndex-1] : undefined}></AmazonsView>
-    </div>
+    }
+
+    const MoveList = (props) => {
+
+        const Move = (props) => {
+            let text = (props.index + 1 < 10 ? "\u00a0" : "") + (props.index + 1).toString() + ". " + moveToText(props.move)
+            let style = {}
+
+            if (!props.isPast && !props.isCurrent) {
+                style["color"] = "grey";
+            }
+            if (props.isCurrent) {
+                style["fontWeight"] = "bold";
+            }
+
+            return (
+                <div style={style}>
+                    {text}
+                </div>
+                );
+        }
+
+        return (
+            <div style={{fontFamily: "monospace", display: "flex", flexWrap: "wrap", flexDirection: "column", justifyContent: "space-around", fontSize: "0.6rem"}}>
+                {props.moves.map((move, index) => 
+                    <Move move={move} index={index} isCurrent={index===props.currMoveIndex} isPast={index < props.currMoveIndex}/>    
+                ) }
+            </div>
+        )
+    }
+    
+    return(
+        <div>
+            <div style={{display: "flex", flexWrap: "wrap"}}>
+                <div style={{flex: "1 1 500px"}}>
+                    <AmazonsView  game_state={game} handle_move={ExecuteMove} last_move={currMoveIndex > 0 ? playbackMoves[currMoveIndex-1] : undefined}></AmazonsView>
+                </div>
+                <div style={{flex: "1 1 200px", maxWidth: "200px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+                    <DashboardPlayer color="black" name="sinany" isTurn={currMoveIndex % 2 === 1}/>
+                    <div style={{flex: "1 1 300px", overflow: "scroll"}}>
+                        <MoveList moves={playbackMoves} currMoveIndex={currMoveIndex}/>
+                    </div>
+                    <DashboardPlayer color="white" name="Hippolyta_1_c" isTurn={currMoveIndex % 2 === 0}/>
+                </div>
+            </div>
+        </div>
+    ) 
 }
 
 
