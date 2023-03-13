@@ -39,14 +39,16 @@ html {
 /* modified from https://dev.to/gmeben/*/
 /* TODO: browser compatibility? */
 .rainbow-text,
-.resume-item:hover .resume-item-cta{
+.resume-item:hover .resume-item-cta,
+.blog h1,
+.blog h2,
+.blog h3,
+.blog h4{
   animation: animateSinan 10s linear infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(to right,#cf5c5c,#c19b4a,#def2a0,#c6ee4a,#42eca6,#64b3d9,#208ea2,#498ada,#5b73df,#897ed3,#cf5c5c,#c19b4a);
   background-size: 1100% 1000%;
-  height: 100vh;
-  width: 100vw;
 }
 @keyframes animateSinan {
   0% { background-position: 0% 0%; }
