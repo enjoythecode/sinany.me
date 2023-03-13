@@ -18,6 +18,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/blog/:id" element={<Blog />} loader={ blogPostLoader }/>
     <Route path="/art" element={<Art />} />
     <Route path="/" element={<Portfolio />} />
+    <Route path="/*" element={<Portfolio />} />
   </Route>
 ));
 
