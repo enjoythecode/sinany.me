@@ -135,12 +135,13 @@ const PlaybackAmazonsBoard = () => {
     }
 
     const DashboardPlayer = (props) => {
+        let baseStyle = {flex: "0 1 20px", padding: "10px"};
         return (
-            <div style={props.isTurn ? {backgroundColor: "#FFFF0044"} : {}}>
+            
+            <div style={props.isTurn ? {backgroundColor: "#FFFF0044", ...baseStyle} : {...baseStyle}}>
                 <b>{props.name}</b>
             </div>
         )
-    
     }
 
     const MoveList = (props) => {
@@ -194,7 +195,7 @@ const PlaybackAmazonsBoard = () => {
                 </div>
                 <div style={{flex: "1 1 200px", maxWidth: "200px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                     <DashboardPlayer color="black" name="sinany" isTurn={currMoveIndex % 2 === 1}/>
-                    <div style={{flex: "1 1 300px", overflow: "scroll"}}>
+                    <div style={{flex: "1 10 300px", overflow: "scroll"}}>
                         <MoveList moves={playbackMoves} currMoveIndex={currMoveIndex} seekFunction={seekToMove}/>
                     </div>
                     <DashboardPlayer color="white" name="Hippolyta_1_c" isTurn={currMoveIndex % 2 === 0}/>
