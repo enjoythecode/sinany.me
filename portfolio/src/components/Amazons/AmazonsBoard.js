@@ -136,8 +136,8 @@ const PlaybackAmazonsBoard = () => {
 
     const DashboardPlayer = (props) => {
         return (
-            <div>
-                <b>{props.name}</b>{props.isTurn ? "isTurn" : ""}
+            <div style={props.isTurn ? {backgroundColor: "#FFFF0044"} : {}}>
+                <b>{props.name}</b>
             </div>
         )
     
