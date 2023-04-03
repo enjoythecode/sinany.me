@@ -24,9 +24,9 @@ const moveToText = (move) => {
 }
 
 const PlaybackAmazonsBoard = () => {
-    const [game] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
+    const [game, setGame] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
     const [currMoveIndex, setCurrMoveIndex] = useState(0);
-    const playbackSpeed = 0.1e3; // ms per move
+    const playbackSpeed = 1e3; // ms per move
 
     const ExecuteMove = (move) => {
         game.apply_move(move);
@@ -124,6 +124,16 @@ const PlaybackAmazonsBoard = () => {
         return () => clearTimeout(timer);
     }, [currMoveIndex, playing])
 
+    const seekToMove = (moveIndex) => {
+        setPlaying(false);
+        setCurrMoveIndex(moveIndex);
+        let newGame = new AmazonsLogic(null, {"size":10, "variation":0});
+        for(let i = 0; i < moveIndex; i++){
+            newGame.apply_move(playbackMoves[i]);
+        }
+        setGame(newGame);
+    }
+
     const DashboardPlayer = (props) => {
         return (
             <div>
@@ -161,7 +171,7 @@ const PlaybackAmazonsBoard = () => {
             }
 
             return (
-                <div style={style}>
+                <div onClick={props.onClickF} style={style}>
                     {text}
                 </div>
                 );
@@ -170,7 +180,7 @@ const PlaybackAmazonsBoard = () => {
         return (
             <div ref={moveListDiv} style={{fontFamily: "monospace", display: "flex", flexWrap: "wrap", flexDirection: "column", justifyContent: "space-around", fontSize: "0.6rem"}}>
                 {props.moves.map((move, index) => 
-                    <Move key={index} move={move} index={index} isCurrent={index===props.currMoveIndex} isPast={index < props.currMoveIndex}/>    
+                    <Move onClickF={()=>{props.seekFunction(index)}} key={index} move={move} index={index} isCurrent={index===props.currMoveIndex} isPast={index < props.currMoveIndex}/>    
                 )}
             </div>
         )
@@ -185,7 +195,7 @@ const PlaybackAmazonsBoard = () => {
                 <div style={{flex: "1 1 200px", maxWidth: "200px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                     <DashboardPlayer color="black" name="sinany" isTurn={currMoveIndex % 2 === 1}/>
                     <div style={{flex: "1 1 300px", overflow: "scroll"}}>
-                        <MoveList moves={playbackMoves} currMoveIndex={currMoveIndex}/>
+                        <MoveList moves={playbackMoves} currMoveIndex={currMoveIndex} seekFunction={seekToMove}/>
                     </div>
                     <DashboardPlayer color="white" name="Hippolyta_1_c" isTurn={currMoveIndex % 2 === 0}/>
                 </div>
