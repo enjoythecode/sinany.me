@@ -1,6 +1,6 @@
 import AmazonsLogic from "./AmazonsLogic.js"
 import AmazonsView from "./AmazonsView.js"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const AmazonsBoard = () => {
     const [game] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
@@ -26,7 +26,7 @@ const moveToText = (move) => {
 const PlaybackAmazonsBoard = () => {
     const [game] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
     const [currMoveIndex, setCurrMoveIndex] = useState(0);
-    const playbackSpeed = 0.5e3; // ms per move
+    const playbackSpeed = 0.1e3; // ms per move
 
     const ExecuteMove = (move) => {
         game.apply_move(move);
@@ -116,7 +116,9 @@ const PlaybackAmazonsBoard = () => {
         const timer = setTimeout(() => {
             if(playing){
                 ExecuteMove(playbackMoves[currMoveIndex]);
-                setCurrMoveIndex(currMoveIndex+1);
+                if(currMoveIndex + 1 < playbackMoves.length){
+                    setCurrMoveIndex(currMoveIndex+1);
+                }
             }
         }, playbackSpeed)
         return () => clearTimeout(timer);
@@ -132,6 +134,20 @@ const PlaybackAmazonsBoard = () => {
     }
 
     const MoveList = (props) => {
+
+        const moveListDiv = useRef();
+
+        useEffect(() => {
+            // Scroll to the move element that is current, on each update of that index.
+            // Reference: https://stackoverflow.com/questions/635706/how-to-scroll-to-an-element-inside-a-div#1592609
+            if(props.currMoveIndex < props.moves.length){
+                let currMoveElement = moveListDiv.current.children.item(props.currMoveIndex);
+                let scrollableParent = moveListDiv.current.parentElement;
+
+                var relativeOffsetTop = currMoveElement.offsetTop - moveListDiv.current.offsetTop - 200;
+                scrollableParent.scrollTop = relativeOffsetTop;
+            }
+        }, []);
 
         const Move = (props) => {
             let text = (props.index + 1 < 10 ? "\u00a0" : "") + (props.index + 1).toString() + ". " + moveToText(props.move)
@@ -152,10 +168,10 @@ const PlaybackAmazonsBoard = () => {
         }
 
         return (
-            <div style={{fontFamily: "monospace", display: "flex", flexWrap: "wrap", flexDirection: "column", justifyContent: "space-around", fontSize: "0.6rem"}}>
+            <div ref={moveListDiv} style={{fontFamily: "monospace", display: "flex", flexWrap: "wrap", flexDirection: "column", justifyContent: "space-around", fontSize: "0.6rem"}}>
                 {props.moves.map((move, index) => 
-                    <Move move={move} index={index} isCurrent={index===props.currMoveIndex} isPast={index < props.currMoveIndex}/>    
-                ) }
+                    <Move key={index} move={move} index={index} isCurrent={index===props.currMoveIndex} isPast={index < props.currMoveIndex}/>    
+                )}
             </div>
         )
     }
