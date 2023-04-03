@@ -1,6 +1,8 @@
 import AmazonsLogic from "./AmazonsLogic.js"
 import AmazonsView from "./AmazonsView.js"
 import { useState, useEffect, useRef } from "react"
+import wqueen from "../../assets/images/wqueen.png"
+import bqueen from "../../assets/images/bqueen.png"
 
 const AmazonsBoard = () => {
     const [game] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
@@ -27,6 +29,7 @@ const PlaybackAmazonsBoard = () => {
     const [game, setGame] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
     const [currMoveIndex, setCurrMoveIndex] = useState(0);
     const playbackSpeed = 1e3; // ms per move
+    
 
     const ExecuteMove = (move) => {
         game.apply_move(move);
@@ -135,11 +138,17 @@ const PlaybackAmazonsBoard = () => {
     }
 
     const DashboardPlayer = (props) => {
-        let baseStyle = {flex: "0 1 20px", padding: "10px"};
+        let baseStyle = {flex: "0 1 20px", padding: "10px", display: "flex"};
+        let playerColorIndicatorQueen = props.color === "white" ? wqueen : bqueen;
+        let playerColorIndicatorQueenAlt = props.color === "white" ? "White Queen Player" : "Black Queen Player";
         return (
-            
             <div style={props.isTurn ? {backgroundColor: "#FFFF0044", ...baseStyle} : {...baseStyle}}>
-                <b>{props.name}</b>
+                <div style={{display:"flex", justifyContent:"center", alignItems: "center", minWidth: "36px", minHeight:"36px", backgroundColor: props.color === "black" ? "#f0d9b5" : "#946f51", borderRadius: "50%", marginRight: "5px"}}>
+                    <img style={{maxWidth: "30px", maxHeight:"30px"}} src={playerColorIndicatorQueen} alt={playerColorIndicatorQueenAlt}></img>
+                </div>
+                <div style={{display: "inline-block"}}>
+                    <b style={{"height": "36px", "lineHeight": "36px"}}>{props.name}</b>
+                </div>
             </div>
         )
     }

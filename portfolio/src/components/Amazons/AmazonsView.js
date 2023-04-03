@@ -1,6 +1,6 @@
-import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
-import wqueen from "../../assets/images/wqueen.png";
+import { observer } from "mobx-react"
+import { useEffect, useState } from "react"
+import wqueen from "../../assets/images/wqueen.png"
 import bqueen from "../../assets/images/bqueen.png"
 import fire from "../../assets/images/fire.png"
 
