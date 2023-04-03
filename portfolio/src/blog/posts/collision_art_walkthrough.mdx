@@ -1,0 +1,46 @@
+# Programmatic Art Walkthrough Post
+
+TODO: standardize objects/cars
+
+-> introduction: here is some cool art that I programmed in a flight to Houston, TX in under *200* lines of code.
+- I think it is a great introduction to how I approach programmatic art, and I want to walk you through
+my artistic and technical process to how I arrived at this GIF within a few hours.
+
+-> inspiration:
+- [reference other artists that do similar things]. overall, what I find magical and enjoyable about these kinds of GIFs
+is that they seem organic, yet they are made out of formal code definitions. I always find it an interesting puzzle to 
+hide the programmaticness of visual presentation.
+
+-> rough idea: I wanted to represent a chaotic-yet-flawless intersection where objects (let's say cars) are crossing
+at a seemingly haphazard way, yet none collide. specifically, I wanted to project a tension in the viewer that any object *could*
+collide at any point and break the orchestrated movement, while ensuring that no collisions in fact occur. of course, I am too lazy
+as a programmer to hand-design a complicated intersection, so I wrote code to automate the process for me.
+
+-> starting off: how do we ensure no collisions occur? my base idea was to keep track of what space each object was occupying at
+any given time, and then to generate new objects for as long as new objects could be woven in without causing a collision
+
+{{example: show the grid, and then move one object across the middle, }}
+
+-> necessary step: how to figure out what grid squares a car is occupying. the idea is that as long as no two cars make the same reservation
+for the same square at the same frame, no collisions will occur
+
+{{example: previous + showing what it is blocking underneath.}}
+
+-> next step: adding more vehicles: Instead of having an intricate algorithm that can find potential objects that would fit within
+the existing traffic, a simpler approach is to be able to check if a given car causes any collisions, and then generate a lot of cars randomly and see which ones fit.
+
+{{example: add the function that checks if a car causes a collision, and add the random car generation code.}}
+
+-> loopify! how do we loopify given this representation? any objects that are still visible at the last frame, should "loop back"
+and be visible from where they were in the initial frames.
+
+{{example: loopified board}}
+
+-> variability for realism/naturalistic: cars of same speed are not too interesting, so here I wanted to add variability in the speed of the cars.
+i simply have a min and max speed that I randomly choose between to figure out the speed of each car. here, the approach of having the code 
+that generates cars for us is very useful, because I am able to change how the cars behave without painstaking work, and the rest of the algorithm simply adapts to where the cars are now! the example below is interactive; you can see how shifting the speed range changes the feel of the crossing.
+
+{{example: varying speed (random), range parameter controllable; with a "generate" button}}
+
+bonus: final, more variable GIF widget with random seed
+bonus bonus: (export/share)
