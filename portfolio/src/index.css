@@ -24,7 +24,7 @@ html {
 
 .narrow {
 	/* 90vw, but not wider than 700px */
-	width: min(90vw, 700px);
+	width: min(90vw, 800px);
 }
 
 

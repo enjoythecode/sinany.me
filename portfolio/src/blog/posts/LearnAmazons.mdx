@@ -4,6 +4,14 @@ import AmazonsBoard, { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard } from "..
 # <span className="rainbow-text">An Interactive Introduction to the Game of Amazons</span>
 ##### i love this niche strategy game, and i want to tell you about it
 
+Amazons is an abstract strategy game -- in the same category of games as Chess and Go.
+It is really simple to learn and get playing. You can learn the simple rules within a few minutes,
+and begin to appreciate some of Amazons' intricate strategies!
+
+If you are the kind of person who likes figuring things on their own, see if you
+can figure out the rules of the game by checking out the playback below.
+Want to dive right in? <a href="#playground" className="rainbow-link">Click here to play against a simple bot!</a>
+
 <PlaybackAmazonsBoard></PlaybackAmazonsBoard>
 
 <i style={{fontSize:"14px"}}>Reproduction of a game of Amazons I (sinany) played on
@@ -14,14 +22,10 @@ Playback TODO:
 - have control for restarting the playback
 - show who won in the end
 - correct how the move is used (if current, has it played? if so, how do we handle moveIndex == -1? etc.)
-
-<div style={{fontSize: "0.9rem", "paddingBottom": "1rem"}}>*(wanna dive right in? <a href="#playground" className="rainbow-link">click here to play against a simple bot</a>)*</div>
+- add coordinates to board
+- change move syntax to use the board coordinates
 
 ## <span className="rainbow-text">Getting Started</span>
-
-Amazons is an abstract strategy game -- in the same category of games as Chess and Go.
-However, it is *much* simpler to learn and get playing. The simple rules hide deep strategic complexity, and
-within 5 minutes, you'll be able to play the game and appreciate some of its intricate strategies!
 
 Here is the entirety of the rules for this game, in five bullet points;
 
@@ -109,12 +113,17 @@ I love Amazons' simplicity; that is all the rules of the game, and you are ready
 ---
 
 - emergence in the rules of Amazons
+    - explain roughly what emergence is and why I find it elegant
+    - look around for others who have written on emergence: "what makes abstract strategy board games good"
 
-- implications of game theory
-    - reference to the Numberphile video/Berlekamp
+- implications
+    - first: once boards are independent, only count number of moves available (high-level resigns early)
+    - second: game theory talks about how we merge "sub-games" (independent areas of the board that are blocked off)
+        - "zukz" -- can't count every square; sometimes you can't use everything
 
 - for the curious...
     - where to play it online
+    - BGG
     - articles about solving Amazons in smaller boards
     
 ---
