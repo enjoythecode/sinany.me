@@ -36,7 +36,7 @@ const moveToText = (move) => {
 
 const PlaybackAmazonsBoard = () => {
     const [game, setGame] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
-    const [currMoveIndex, setCurrMoveIndex] = useState(0);
+    const [currMoveIndex, setCurrMoveIndex] = useState(-1); // the next move to be executed
     const playbackSpeed = 1e3; // ms per move
     
 
@@ -127,7 +127,7 @@ const PlaybackAmazonsBoard = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             if(playing){
-                ExecuteMove(playbackMoves[currMoveIndex]);
+                ExecuteMove(playbackMoves[currMoveIndex + 1]);
                 if(currMoveIndex + 1 < playbackMoves.length){
                     setCurrMoveIndex(currMoveIndex+1);
                 }
@@ -169,7 +169,7 @@ const PlaybackAmazonsBoard = () => {
         useEffect(() => {
             // Scroll to the move element that is current, on each update of that index.
             // Reference: https://stackoverflow.com/questions/635706/how-to-scroll-to-an-element-inside-a-div#1592609
-            if(props.currMoveIndex < props.moves.length){
+            if(props.currMoveIndex >= 0 && props.currMoveIndex < props.moves.length){
                 let currMoveElement = moveListDiv.current.children.item(props.currMoveIndex);
                 let scrollableParent = moveListDiv.current.parentElement;
 
@@ -209,7 +209,7 @@ const PlaybackAmazonsBoard = () => {
         <div>
             <div style={{display: "flex", flexWrap: "wrap"}}>
                 <div style={{flex: "1 1 500px"}}>
-                    <AmazonsView  game_state={game} handle_move={ExecuteMove} last_move={currMoveIndex > 0 ? playbackMoves[currMoveIndex-1] : undefined}></AmazonsView>
+                    <AmazonsView game_state={game} handle_move={ExecuteMove} last_move={currMoveIndex >= 0 ? playbackMoves[currMoveIndex] : undefined}></AmazonsView>
                 </div>
                 <div style={{flex: "1 1 200px", maxWidth: "200px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                     <div style={{display: "flex", justifyContent: "space-between", fontSize: "1.3rem"}}>
