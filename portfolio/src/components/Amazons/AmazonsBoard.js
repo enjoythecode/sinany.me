@@ -203,6 +203,13 @@ const PlaybackAmazonsBoard = () => {
                     <AmazonsView  game_state={game} handle_move={ExecuteMove} last_move={currMoveIndex > 0 ? playbackMoves[currMoveIndex-1] : undefined}></AmazonsView>
                 </div>
                 <div style={{flex: "1 1 200px", maxWidth: "200px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+                    <div style={{display: "flex", justifyContent: "space-between", fontSize: "1.3rem"}}>
+                        <button class="button-no-style" title="Seek to beginning" onClick={() => {seekToMove(0)}}>⏮️</button>
+                        <button class="button-no-style" title="Go to previous move" onClick={() => {seekToMove(Math.max(0, currMoveIndex - 1))}}>⏪</button>
+                        <button class="button-no-style" title="Play/Pause playback" onClick={() => {setPlaying(!playing)}}>{playing ? "⏸️" : "▶️" }</button>
+                        <button class="button-no-style" title="Go to next move" onClick={() => {seekToMove(Math.min(playbackMoves.length - 1, currMoveIndex + 1))}}>⏩</button>
+                        <button class="button-no-style" title="Seek to end" onClick={() => {seekToMove(playbackMoves.length - 1)}}>⏭️</button>
+                    </div>
                     <DashboardPlayer color="black" name="sinany" isTurn={currMoveIndex % 2 === 1}/>
                     <div style={{flex: "1 10 300px", overflow: "scroll"}}>
                         <MoveList moves={playbackMoves} currMoveIndex={currMoveIndex} seekFunction={seekToMove}/>

@@ -27,6 +27,14 @@ html {
 	width: min(90vw, 800px);
 }
 
+.button-no-style {
+	all: unset;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
 
 .vertical-center-child-div {
