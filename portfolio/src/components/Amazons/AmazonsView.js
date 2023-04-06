@@ -1,5 +1,5 @@
 import { observer } from "mobx-react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef, useLayoutEffect } from "react"
 import wqueen from "../../assets/images/wqueen.png"
 import bqueen from "../../assets/images/bqueen.png"
 import fire from "../../assets/images/fire.png"
@@ -157,26 +157,47 @@ const AmazonsView = observer(({ game_state, handle_move, last_move }) => {
     }
   }
 
+  // code reference: https://bobbyhadz.com/blog/react-get-width-of-element
+  const ref = useRef(null);
+
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    setWidth(ref.current.offsetWidth);
+  }, []);
+
   if (game_state) {
     let boardCells = [];
     let size = game_state.board.length;
 
     for (let x = 0; x < size; x++) {
       for (let y = 0; y < size; y++) {
+      
+        let content = [];
+        if(y === 0){
+          content.push(<p style={{fontSize: (width/30).toString()+"px", position: "absolute", top:"1%", left: "1%", padding: "0", margin: "0"}}>{10-x}</p>)
+        }
+        if(x === size - 1){
+          content.push(<p style={{fontSize: (width/30).toString()+"px", position: "absolute", bottom:"1%", right: "1%", padding: "0", margin: "0"}}>{String.fromCharCode(parseInt(y) + "A".charCodeAt(0))}</p>)
+        }
         boardCells.push(
           <div
+            style={{position: "relative"}}
             className={styleClassesForCellAtCoord(x.toString() + y.toString())}
             key={x * size + y}
             onClick={() => {
               clickCell(x.toString() + y.toString());
             }}
-          ></div>
+          >{content ? content : ""} </div>
         );
+      
+
       }
     }
 
     return (
       <div
+        ref={ref}
         className={"amazonsBoard"}
         style={amazonsBoardDynamicGridRules(game_state.board.length)}
       >

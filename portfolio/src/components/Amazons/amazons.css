@@ -12,10 +12,12 @@
 
 .cellDark {
   background-color: #946f51;
+  color: #f0d9b5;
 }
 
 .cellLight {
   background-color: #f0d9b5;
+  color: #946f51;
 }
 
 .cellDark.indicatorLastMove {
