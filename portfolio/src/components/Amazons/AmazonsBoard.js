@@ -22,7 +22,16 @@ const SinglePlayerAmazonsBoard = () => {
 }
 
 const moveToText = (move) => {
-    return move.from + "-" + move.to + "/" + move.shoot;
+    const convertInnerRepresentationToGridCoordinates = (innerRepr) => {
+        return columnIntToLetter(innerRepr[1]) + (10 - parseInt(innerRepr[0])).toString()
+    }
+    const columnIntToLetter = (columnIntStr) => {
+        return String.fromCharCode(parseInt(columnIntStr) + "A".charCodeAt(0))
+    }
+    let from = convertInnerRepresentationToGridCoordinates(move.from)
+    let to = convertInnerRepresentationToGridCoordinates(move.to)
+    let shoot = convertInnerRepresentationToGridCoordinates(move.shoot)
+    return from + "-" + to + "/" + shoot;
 }
 
 const PlaybackAmazonsBoard = () => {
@@ -43,7 +52,7 @@ const PlaybackAmazonsBoard = () => {
         {'from': '60', 'to': '70', 'shoot': '75'},
         {'from': '39', 'to': '59', 'shoot': '68'},
         {'from': '96', 'to': '46', 'shoot': '48'},
-        {'from': '93', 'to': '23', 'shoot': '78'},
+        {'from': '03', 'to': '23', 'shoot': '78'},
         {'from': '69', 'to': '89', 'shoot': '87'},
         {'from': '59', 'to': '29', 'shoot': '79'},
         {'from': '70', 'to': '74', 'shoot': '84'},
@@ -52,10 +61,10 @@ const PlaybackAmazonsBoard = () => {
         {'from': '85', 'to': '94', 'shoot': '98'},
         {'from': '74', 'to': '52', 'shoot': '96'},
         {'from': '29', 'to': '26', 'shoot': '37'},
-        {'from': '52', 'to': '16', 'shoot': '95'},
+        {'from': '52', 'to': '16', 'shoot': '05'},
         {'from': '41', 'to': '42', 'shoot': '64'},
         {'from': '46', 'to': '56', 'shoot': '92'},
-        {'from': '96', 'to': '17', 'shoot': '27'},
+        {'from': '06', 'to': '17', 'shoot': '27'},
         {'from': '16', 'to': '61', 'shoot': '62'},
         {'from': '94', 'to': '76', 'shoot': '54'},
         {'from': '56', 'to': '29', 'shoot': '18'},
@@ -83,22 +92,22 @@ const PlaybackAmazonsBoard = () => {
         {'from': '85', 'to': '94', 'shoot': '83'},
         {'from': '31', 'to': '20', 'shoot': '31'},
         {'from': '21', 'to': '11', 'shoot': '10'},
-        {'from': '17', 'to': '15', 'shoot': '94'},
+        {'from': '17', 'to': '15', 'shoot': '04'},
         {'from': '39', 'to': '17', 'shoot': '16'},
         {'from': '15', 'to': '26', 'shoot': '15'},
         {'from': '94', 'to': '85', 'shoot': '95'},
         {'from': '66', 'to': '44', 'shoot': '53'},
         {'from': '85', 'to': '63', 'shoot': '74'},
         {'from': '20', 'to': '21', 'shoot': '20'},
-        {'from': '11', 'to': '90', 'shoot': '11'},
+        {'from': '11', 'to': '00', 'shoot': '11'},
         {'from': '44', 'to': '66', 'shoot': '55'},
         {'from': '99', 'to': '89', 'shoot': '99'},
         {'from': '66', 'to': '57', 'shoot': '66'},
-        {'from': '90', 'to': '91', 'shoot': '90'},
+        {'from': '00', 'to': '01', 'shoot': '00'},
         {'from': '57', 'to': '47', 'shoot': '57'},
-        {'from': '91', 'to': '92', 'shoot': '91'},
+        {'from': '01', 'to': '02', 'shoot': '01'},
         {'from': '47', 'to': '46', 'shoot': '47'},
-        {'from': '92', 'to': '93', 'shoot': '92'},
+        {'from': '02', 'to': '03', 'shoot': '02'},
         {'from': '46', 'to': '35', 'shoot': '46'},
         {'from': '89', 'to': '88', 'shoot': '89'},
         {'from': '81', 'to': '91', 'shoot': '82'},
