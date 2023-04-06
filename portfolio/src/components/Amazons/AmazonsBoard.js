@@ -140,7 +140,7 @@ const PlaybackAmazonsBoard = () => {
         setPlaying(false);
         setCurrMoveIndex(moveIndex);
         let newGame = new AmazonsLogic(null, {"size":10, "variation":0});
-        for(let i = 0; i < moveIndex; i++){
+        for(let i = 0; i <= moveIndex; i++){
             newGame.apply_move(playbackMoves[i]);
         }
         setGame(newGame);
@@ -213,7 +213,7 @@ const PlaybackAmazonsBoard = () => {
                 </div>
                 <div style={{flex: "1 1 200px", maxWidth: "200px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                     <div style={{display: "flex", justifyContent: "space-between", fontSize: "1.3rem"}}>
-                        <button class="button-no-style" title="Seek to beginning" onClick={() => {seekToMove(0)}}>⏮️</button>
+                        <button class="button-no-style" title="Seek to beginning" onClick={() => {seekToMove(-1)}}>⏮️</button>
                         <button class="button-no-style" title="Go to previous move" onClick={() => {seekToMove(Math.max(0, currMoveIndex - 1))}}>⏪</button>
                         <button class="button-no-style" title="Play/Pause playback" onClick={() => {setPlaying(!playing)}}>{playing ? "⏸️" : "▶️" }</button>
                         <button class="button-no-style" title="Go to next move" onClick={() => {seekToMove(Math.min(playbackMoves.length - 1, currMoveIndex + 1))}}>⏩</button>
