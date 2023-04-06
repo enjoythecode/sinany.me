@@ -179,7 +179,7 @@ const PlaybackAmazonsBoard = () => {
         }, []);
 
         const Move = (props) => {
-            let text = (props.index + 1 < 10 ? "\u00a0" : "") + (props.index + 1).toString() + ". " + moveToText(props.move)
+            let text = props.custom_text !== undefined ? props.custom_text : (props.index + 1 < 10 ? "\u00a0" : "") + (props.index + 1).toString() + ". " + moveToText(props.move)
             let style = {}
 
             if (!props.isPast && !props.isCurrent) {
@@ -201,6 +201,10 @@ const PlaybackAmazonsBoard = () => {
                 {props.moves.map((move, index) => 
                     <Move onClickF={()=>{props.seekFunction(index)}} key={index} move={move} index={index} isCurrent={index===props.currMoveIndex} isPast={index < props.currMoveIndex}/>    
                 )}
+                {props.isResign ? 
+                <Move custom_text={(props.moves.length + 1).toString() + ". resign (0-1)"}/>
+                : ""}
+                <></>
             </div>
         )
     }
@@ -209,7 +213,7 @@ const PlaybackAmazonsBoard = () => {
         <div>
             <div style={{display: "flex", flexWrap: "wrap"}}>
                 <div style={{flex: "1 1 500px"}}>
-                    <AmazonsView game_state={game} handle_move={ExecuteMove} last_move={currMoveIndex >= 0 ? playbackMoves[currMoveIndex] : undefined}></AmazonsView>
+                    <AmazonsView game_state={game} last_move={currMoveIndex >= 0 ? playbackMoves[currMoveIndex] : undefined}></AmazonsView>
                 </div>
                 <div style={{flex: "1 1 200px", maxWidth: "200px", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                     <div style={{display: "flex", justifyContent: "space-between", fontSize: "1.3rem"}}>
@@ -219,11 +223,11 @@ const PlaybackAmazonsBoard = () => {
                         <button class="button-no-style" title="Go to next move" onClick={() => {seekToMove(Math.min(playbackMoves.length - 1, currMoveIndex + 1))}}>⏩</button>
                         <button class="button-no-style" title="Seek to end" onClick={() => {seekToMove(playbackMoves.length - 1)}}>⏭️</button>
                     </div>
-                    <DashboardPlayer color="black" name="sinany" isTurn={currMoveIndex % 2 === 1}/>
+                    <DashboardPlayer color="black" name="sinany" isTurn={currMoveIndex % 2 === 0}/>
                     <div style={{flex: "1 10 300px", overflow: "scroll"}}>
-                        <MoveList moves={playbackMoves} currMoveIndex={currMoveIndex} seekFunction={seekToMove}/>
+                        <MoveList moves={playbackMoves} currMoveIndex={currMoveIndex} seekFunction={seekToMove} isResign={true}/>
                     </div>
-                    <DashboardPlayer color="white" name="Hippolyta_1_c" isTurn={currMoveIndex % 2 === 0}/>
+                    <DashboardPlayer color="white" name="Hippolyta_1_c" isTurn={currMoveIndex % 2 === 1}/>
                 </div>
             </div>
         </div>
