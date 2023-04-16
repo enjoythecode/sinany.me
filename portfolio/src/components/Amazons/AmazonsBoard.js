@@ -1,5 +1,6 @@
 import AmazonsLogic from "./AmazonsLogic.js"
 import AmazonsView from "./AmazonsView.js"
+import AmazonsViewDisplayCoordinatesOnHover from "./AmazonsViewDisplayCoordinatesOnHover.js"
 import { useState, useEffect, useRef } from "react"
 import wqueen from "../../assets/images/wqueen.png"
 import bqueen from "../../assets/images/bqueen.png"
@@ -18,6 +19,13 @@ const SinglePlayerAmazonsBoard = () => {
     }
     return <div>
         <AmazonsView game_state={game} handle_move={ExecuteAnyMove}></AmazonsView>
+    </div>
+}
+
+const AmazonsBoardDisplayColumns = () => {
+    const [game] = useState(() => {return new AmazonsLogic(null, {"size":10, "variation":0})});
+    return <div>
+        <AmazonsViewDisplayCoordinatesOnHover game_state={game}></AmazonsViewDisplayCoordinatesOnHover>
     </div>
 }
 
@@ -236,4 +244,4 @@ const PlaybackAmazonsBoard = () => {
 
 
 export default AmazonsBoard;
-export { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard };
+export { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard, AmazonsBoardDisplayColumns };

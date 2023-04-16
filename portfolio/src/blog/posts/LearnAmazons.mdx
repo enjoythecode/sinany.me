@@ -1,4 +1,4 @@
-import AmazonsBoard, { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard } from "../../components/Amazons/AmazonsBoard.js"
+import AmazonsBoard, { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard, AmazonsBoardDisplayColumns } from "../../components/Amazons/AmazonsBoard.js"
 import SideBySideContent from "../../components/SideBySideContent.js"
 
 
@@ -43,16 +43,14 @@ A valid path is an  horizontal, vertical, or diagonal sequence of only empty squ
 That was the entirety of the rules for the game, presented densely. I will now explain each bullet point with examples.
 You can also <a href="#playground" className="rainbow-link">skip ahead to the playground</a> if you'd like!
 
-TODO: write a component for putting content on the right half of the column 
-
 ### 1. The board
-<SideBySideContent left={`The board is a simple, 10 by 10 square grid. We can assign letters to the columns and 
+<SideBySideContent left={<p>The board is a simple, 10 by 10 square grid. We can assign letters to the columns and 
 numbers to the rows for our notation, just like in chess. In this case, the 
 left-most column is "A", all the way through column J at the right-edge. Similarly,
-we number the rows 1 through 10, starting from the bottom.`} right={(<SinglePlayerAmazonsBoard></SinglePlayerAmazonsBoard>)}>
+we number the rows 1 through 10, starting from the bottom.
+<br/><br/>
+You can hover your mouse over the board to the right to see where the coordinates intersect!</p>} right={(<AmazonsBoardDisplayColumns></AmazonsBoardDisplayColumns>)}>
 </SideBySideContent>
-
-TODO: chess-board with row/col highlighting on mouse-over
 
 ### 2. The pieces
 
