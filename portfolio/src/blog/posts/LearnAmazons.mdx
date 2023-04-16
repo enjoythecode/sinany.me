@@ -1,4 +1,5 @@
 import AmazonsBoard, { SinglePlayerAmazonsBoard, PlaybackAmazonsBoard } from "../../components/Amazons/AmazonsBoard.js"
+import SideBySideContent from "../../components/SideBySideContent.js"
 
 
 # <span className="rainbow-text">An Interactive Introduction to the Game of Amazons</span>
@@ -21,7 +22,8 @@ Want to dive right in? <a href="#playground" className="rainbow-link">Click here
 
 Here is the entirety of the rules for this game, in five bullet points;
 
-*TODO: add rainbow border here!*
+<div style={{border: "white 3px solid", animation: "animateRainbowBorderColor 10s linear infinite", padding: "5px"}}>
+
 <b>
 1. Amazons is (most often) played on a 10x10 square grid.
 
@@ -34,20 +36,21 @@ A valid path is an  horizontal, vertical, or diagonal sequence of only empty squ
 
 5. The last player to be able to make a move, <span className="rainbow-text">wins</span>!
 </b>
+</div>
 
 ## Breaking the Rules Down
 
-Those are the rules, presented densely. I will now explain each bullet point with examples.
+That was the entirety of the rules for the game, presented densely. I will now explain each bullet point with examples.
 You can also <a href="#playground" className="rainbow-link">skip ahead to the playground</a> if you'd like!
 
 TODO: write a component for putting content on the right half of the column 
 
 ### 1. The board
-
-The board is a simple, 10 by 10 square grid. We can assign letters to the columns and 
+<SideBySideContent left={`The board is a simple, 10 by 10 square grid. We can assign letters to the columns and 
 numbers to the rows for our notation, just like in chess. In this case, the 
 left-most column is "A", all the way through column J at the right-edge. Similarly,
-we number the rows 1 through 10, starting from the bottom.
+we number the rows 1 through 10, starting from the bottom.`} right={(<SinglePlayerAmazonsBoard></SinglePlayerAmazonsBoard>)}>
+</SideBySideContent>
 
 TODO: chess-board with row/col highlighting on mouse-over
 

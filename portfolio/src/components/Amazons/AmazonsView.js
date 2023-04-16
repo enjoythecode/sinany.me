@@ -199,7 +199,7 @@ const AmazonsView = observer(({ game_state, handle_move, last_move }) => {
       <div
         ref={ref}
         className={"amazonsBoard"}
-        style={amazonsBoardDynamicGridRules(game_state.board.length)}
+        style={{...amazonsBoardDynamicGridRules(game_state.board.length), width: "100%"}}
       >
         {boardCells}
         {pieces}
