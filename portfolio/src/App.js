@@ -44,12 +44,11 @@ function App() {
 			<div>
 				<h1>
 					<span className="rainbow-text">Hi, I'm Sinan! </span> 
-						I am a software engineering student looking to join a team of smart, passionate problem solvers.
+						I am a software engineer at <a className="rainbow-link" href='https://broadwaytechnology.com/' target='_blank' rel="noreferrer">Broadway Technology</a> working with a team of smart, passionate problem solvers.
 					
 				</h1>
 
-				<p><span>I am  graduating May 2023; {/*<br style={{"marginBottom": "0.6em"}}/>*/}
-					check out my <a className="rainbow-link" href="/Sinan_Yumurtaci_Resume.pdf">resume</a> (or read below), and <a className="rainbow-link" href="mailto:sinan.yumurtaci@gmail.com">let's chat!</a></span></p>
+				<p><span>Check out my <a className="rainbow-link" href="/Sinan_Yumurtaci_Resume.pdf">resume</a> (or read below), and <a className="rainbow-link" href="mailto:sinan.yumurtaci@gmail.com">let's chat!</a></span></p>
 			</div>
 		</header>
 
