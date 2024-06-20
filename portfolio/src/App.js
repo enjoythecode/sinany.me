@@ -44,7 +44,7 @@ function App() {
 			<div>
 				<h1>
 					<span className="rainbow-text">Hi, I'm Sinan! </span> 
-						I am a software engineer at <a className="rainbow-link" href='https://broadwaytechnology.com/' target='_blank' rel="noreferrer">Broadway Technology</a> working with a team of smart, passionate problem solvers.
+						I am a software engineer at <a className="rainbow-link" href='https://bloomberg.com/' target='_blank' rel="noreferrer">Bloomberg LP</a> working with a team of smart, passionate problem solvers.
 					
 				</h1>
 
