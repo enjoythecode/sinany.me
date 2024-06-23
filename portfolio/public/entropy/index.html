@@ -9,9 +9,68 @@
         background-color: #131516;
         color: #d8d4cf;
       }
+      .autobuy-var {
+        border-bottom: 1px dotted #fff;
+        text-decoration: none;
+      }
     </style>
   </head>
 <body>
-    <script src="main.js"></script>
+    
+  <p title="entropy" >Entropy: <span class="autobuy-var" id="dashboard-entropy"></span> </p>
+  <span title="ept">Entropy per Tick (EpT): <span class="autobuy-var" id="dashboard-ept"></span></span>
+  
+  <hr>
+
+  <span id="timectl-currTick"></span>
+  <div id="timectl-timeGraphic">|</div>
+  <button id="timectl-playPauseBtn">Play</button>
+  <button id="timectl-stepOneTick">Step 1 tick</button>
+  
+  <hr>
+  
+  <button id="building-flipper-buy">Buy a coin flipper</button>
+  <button id="building-flipper-ff">fast forward to buying a flipper</button>
+  <p>
+    <span title="building_flipper_ept">
+      Each "coin flipper" gives <span class="autobuy-var" id="building-flipper-singleEpt">0.1</span> EpT.
+    </span>
+    <span title="building_flipper_count">
+      You have <span class="autobuy-var" id="building-flipper-ownedCount"></span>.
+    </span>
+    <span title="building_flipper_cost">
+      Cost: <span class="autobuy-var" id="building-flipper-cost"></span></p>
+    </span>
+  <span>autobuy formula:</span><textarea id="building-flipper-autobuyFormula" style="resize:both;display:block;"></textarea> <span id="building-flipper-autobuyValue"></span><br>
+  <br>
+
+  <button id="building-tv-buy">Buy a "second building"</button>
+  <button id="building-tv-ff">fast forward to buying a "second building"</button>
+  <p>
+    <span title="building_tv_ept">
+      Each "second building" gives <span class="autobuy-var" id="building-tv-singleEpt">0.1</span> EpT.
+    </span>
+    <span title="building_tv_count">
+      You have <span class="autobuy-var" id="building-tv-ownedCount"></span>.
+    </span>
+    <span title="building_tv_cost">
+      Cost: <span class="autobuy-var" id="building-tv-cost"></span>
+    </span>
+  </p>
+  <span>autobuy formula:</span><textarea id="building-tv-autobuyFormula" style="resize:both;display:block;"></textarea> <span id="building-tv-autobuyValue"></span><br>
+
+  <hr/>
+
+  <h2>Milestones</h2>
+  <div>1. Have 7 Entropy per Tick (EpT) -- <span id="milestone-1-progress"></span></div>
+  <div>2. Have 10 of Building 2 -- <span id="milestone-2-progress"></span></div>
+
+  <hr>
+
+  <div>
+    <a href="./DOCS.md#Autobuy">autobuy docs</a>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
