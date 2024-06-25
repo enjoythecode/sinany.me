@@ -9,9 +9,41 @@
         background-color: #131516;
         color: #d8d4cf;
       }
+      .autobuy-var {
+        border-bottom: 1px dotted #fff;
+        text-decoration: none;
+      }
     </style>
   </head>
 <body>
-    <script src="main.js"></script>
+    
+  <p title="entropy" >Entropy: <span class="autobuy-var" id="dashboard-entropy"></span> </p>
+  <span title="ept">Entropy per Tick (EpT): <span class="autobuy-var" id="dashboard-ept"></span></span>
+  
+  <hr>
+
+  <span id="timectl-currTick"></span>
+  <div id="timectl-timeGraphic">|</div>
+  <button id="timectl-playPauseBtn">Play</button>
+  <button id="timectl-stepOneTick">Step 1 tick</button>
+  
+  <hr>
+
+  <div id="buildings-container"></div>
+
+  <hr/>
+
+  <h2>Milestones</h2>
+  <div>1. Have 7 Entropy per Tick (EpT) -- <span id="milestone-1-progress"></span></div>
+  <div>2. Have 10 of Building 2 -- <span id="milestone-2-progress"></span></div>
+  <div>3. Have 100 Entropy per Tick (EpT) -- <span id="milestone-3-progress"></span></div>
+
+  <hr>
+
+  <div>
+    <a href="./DOCS.md#Autobuy">autobuy docs</a>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
