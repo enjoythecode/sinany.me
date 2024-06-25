@@ -7,7 +7,6 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-<<<<<<< HEAD
 var Building = function() { };
 $hxClasses["Building"] = Building;
 Building.__name__ = true;
@@ -52,8 +51,6 @@ Building.prototype = {
 	}
 	,__class__: Building
 };
-=======
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 var Cell = function() {
 	this.parser = new hscript_Parser();
 	this.interp = new hscript_Interp();
@@ -62,11 +59,7 @@ $hxClasses["Cell"] = Cell;
 Cell.__name__ = true;
 Cell.prototype = {
 	parse: function(expr_) {
-<<<<<<< HEAD
 		haxe_Log.trace(this.expr,{ fileName : "src/Cell.hx", lineNumber : 16, className : "Cell", methodName : "parse"});
-=======
-		haxe_Log.trace(this.expr,{ fileName : "src/Cell.hx", lineNumber : 14, className : "Cell", methodName : "parse"});
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 		this.expr = expr_;
 		this.ast = this.parser.parseString(this.expr);
 	}
@@ -79,7 +72,6 @@ Cell.prototype = {
 		}
 		this.interp.variables.h["entropy"] = engine.entropy;
 		this.interp.variables.h["ept"] = engine.eps;
-<<<<<<< HEAD
 		var h = engine.buildings.h;
 		var build_h = h;
 		var build_keys = Object.keys(h);
@@ -95,18 +87,6 @@ Cell.prototype = {
 			var value1 = build.singleEpt();
 			this2.h["building_${build.shortName}_ept"] = value1;
 		}
-=======
-		var this1 = this.interp.variables;
-		var value = engine.cost_flipper();
-		this1.h["building_flipper_cost"] = value;
-		var this1 = this.interp.variables;
-		var value = engine.cost_second();
-		this1.h["building_tv_cost"] = value;
-		this.interp.variables.h["building_flipper_count"] = engine.coin_flipper;
-		this.interp.variables.h["building_tv_count"] = engine.blg_second;
-		this.interp.variables.h["building_flipper_ept"] = 0.1;
-		this.interp.variables.h["building_tv_ept"] = 1;
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 		var result = this.interp.execute(this.ast);
 		if(Type.typeof(result) == ValueType.TFloat) {
 			return Math.round(result * 10) / 10;
@@ -118,7 +98,6 @@ Cell.prototype = {
 	}
 	,__class__: Cell
 };
-<<<<<<< HEAD
 var CoinFlipper = function() {
 	this.longName = "Coin Flipper";
 	this.shortName = Defs.S_BLG_FLIPPER;
@@ -136,8 +115,6 @@ CoinFlipper.prototype = $extend(Building.prototype,{
 var Defs = function() { };
 $hxClasses["Defs"] = Defs;
 Defs.__name__ = true;
-=======
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 var Engine = function() {
 	this.eps = 0;
 	this.buildings = new haxe_ds_StringMap();
@@ -157,10 +134,7 @@ var Engine = function() {
 	this.ticks = 0;
 	this.milestone_1 = -1;
 	this.milestone_2 = -1;
-<<<<<<< HEAD
 	this.milestone_3 = -1;
-=======
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 	this.cells = new haxe_ds_StringMap();
 	this.action("buy1");
 };
@@ -185,7 +159,6 @@ Engine.prototype = {
 		}
 	}
 	,check_autobuy: function() {
-<<<<<<< HEAD
 		var argmax = function(arr) {
 			var max = arr[0];
 			var ret = 0;
@@ -230,51 +203,6 @@ Engine.prototype = {
 				return;
 			}
 		}
-=======
-		if(this.cells.h["autobuy_blg1"].expr == null) {
-			return;
-		}
-		if(this.cells.h["autobuy_blg2"].expr == null) {
-			return;
-		}
-		haxe_Log.trace("hi",{ fileName : "src/Engine.hx", lineNumber : 46, className : "Engine", methodName : "check_autobuy"});
-		if(this.cells.h["autobuy_blg1"].expr.length == 0 || this.cells.h["autobuy_blg2"].expr.length == 0) {
-			return;
-		}
-		var blg1_val = this.cells.h["autobuy_blg1"].execute(this);
-		var blg2_val = this.cells.h["autobuy_blg2"].execute(this);
-		haxe_Log.trace("hi2",{ fileName : "src/Engine.hx", lineNumber : 50, className : "Engine", methodName : "check_autobuy"});
-		haxe_Log.trace(blg1_val,{ fileName : "src/Engine.hx", lineNumber : 52, className : "Engine", methodName : "check_autobuy"});
-		haxe_Log.trace(blg2_val,{ fileName : "src/Engine.hx", lineNumber : 53, className : "Engine", methodName : "check_autobuy"});
-		if(-0.00001 < blg1_val && blg1_val < 0.00001) {
-			return;
-		}
-		if(-0.00001 < blg2_val && blg2_val < 0.00001) {
-			return;
-		}
-		haxe_Log.trace("hi3",{ fileName : "src/Engine.hx", lineNumber : 56, className : "Engine", methodName : "check_autobuy"});
-		while(true) {
-			if(blg1_val > blg2_val) {
-				if(this.can_action("buy1")) {
-					this.action("buy1");
-				} else {
-					break;
-				}
-			} else if(this.can_action("buy2")) {
-				this.action("buy2");
-			} else {
-				break;
-			}
-			blg1_val = this.cells.h["autobuy_blg1"].execute(this);
-			blg2_val = this.cells.h["autobuy_blg2"].execute(this);
-		}
-	}
-	,cost_flipper: function() {
-		return 10 + this.coin_flipper;
-	}
-	,cost_second: function() {
-		return 150 + this.blg_second;
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 	}
 	,can_action: function(act) {
 		var blg = null;
@@ -322,7 +250,6 @@ var GameLoop = function() {
 	this.last_autotick_tick = HxOverrides.now() / 1000;
 	this.ff_target = null;
 	this.engine = new Engine();
-<<<<<<< HEAD
 	var h = this.engine.buildings.h;
 	var blg_h = h;
 	var blg_keys = Object.keys(h);
@@ -335,14 +262,6 @@ var GameLoop = function() {
 		var v = new Cell();
 		this1.h[k] = v;
 	}
-=======
-	var this1 = this.engine.cells;
-	var v = new Cell();
-	this1.h["autobuy_blg1"] = v;
-	var this1 = this.engine.cells;
-	var v = new Cell();
-	this1.h["autobuy_blg2"] = v;
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 	this.draw_initial();
 };
 $hxClasses["GameLoop"] = GameLoop;
@@ -356,18 +275,13 @@ GameLoop.prototype = {
 		if(((el) instanceof HTMLButtonElement)) {
 			return js_Boot.__cast(el , HTMLButtonElement);
 		}
-<<<<<<< HEAD
 		throw haxe_Exception.thrown("expected " + id + " to be a ButtonElement");
-=======
-		throw haxe_Exception.thrown("expected 'building-flipper-buy' to be a ButtonElement");
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 	}
 	,identifyTextArea: function(id) {
 		var el = window.document.getElementById(id);
 		if(((el) instanceof HTMLTextAreaElement)) {
 			return js_Boot.__cast(el , HTMLTextAreaElement);
 		}
-<<<<<<< HEAD
 		throw haxe_Exception.thrown("expected " + id + " to be a TextAreaElement");
 	}
 	,draw_initial: function() {
@@ -384,45 +298,12 @@ GameLoop.prototype = {
 			this.identify("buildings-container").appendChild(container);
 			blg.initialDraw(container,this.engine,this);
 		}
-=======
-		throw haxe_Exception.thrown("expected 'building-flipper-buy' to be a TextAreaElement");
-	}
-	,draw_initial: function() {
-		var _gthis = this;
-		this.autobuy_cell_blg1 = this.identifyTextArea("building-flipper-autobuyFormula");
-		this.autobuy_cell_blg2 = this.identifyTextArea("building-tv-autobuyFormula");
-		this.autobuy_cell_blg1.setAttribute("style","resize:both;display:block;");
-		this.autobuy_cell_blg2.setAttribute("style","resize:both;display:block;");
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 		this.identify("timectl-stepOneTick").onclick = function(event) {
 			_gthis.clicked_step();
 		};
 		this.identify("timectl-playPauseBtn").onclick = function(event) {
 			_gthis.clicked_autotick();
 		};
-<<<<<<< HEAD
-=======
-		this.identify("building-flipper-buy").onclick = function(event) {
-			_gthis.clicked_action("buy1");
-		};
-		this.identify("building-flipper-ff").onclick = function(event) {
-			_gthis.clicked_ff_to_action("buy1");
-		};
-		this.identify("building-tv-buy").onclick = function(event) {
-			_gthis.clicked_action("buy2");
-		};
-		this.identify("building-tv-ff").onclick = function(event) {
-			_gthis.clicked_ff_to_action("buy2");
-		};
-		this.engine.cells.h["autobuy_blg1"].parse(this.autobuy_cell_blg1.value);
-		this.engine.cells.h["autobuy_blg2"].parse(this.autobuy_cell_blg2.value);
-		this.identify("building-flipper-autobuyFormula").onblur = function(event) {
-			_gthis.engine.cells.h["autobuy_blg1"].parse(_gthis.autobuy_cell_blg1.value);
-		};
-		this.identify("building-tv-autobuyFormula").onblur = function(event) {
-			_gthis.engine.cells.h["autobuy_blg2"].parse(_gthis.autobuy_cell_blg2.value);
-		};
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 		this.game_loop_timer = new haxe_Timer(16);
 		this.game_loop_timer.run = $bind(this,this.game_loop_timer_tick);
 		this.draw();
@@ -453,7 +334,6 @@ GameLoop.prototype = {
 		}
 	}
 	,draw: function() {
-<<<<<<< HEAD
 		var h = this.engine.buildings.h;
 		var blg_h = h;
 		var blg_keys = Object.keys(h);
@@ -465,22 +345,6 @@ GameLoop.prototype = {
 		}
 		var tmp = this.time_autotick ? "display:none;" : "";
 		this.identify("timectl-stepOneTick").setAttribute("style",tmp);
-=======
-		var tmp = this.time_autotick ? "display:none;" : "";
-		this.identify("timectl-stepOneTick").setAttribute("style",tmp);
-		this.identify("building-flipper-singleEpt").textContent = "0.1";
-		var tmp = this.engine.cost_flipper();
-		this.identify("building-flipper-cost").textContent = "" + tmp;
-		this.identify("building-flipper-ownedCount").textContent = "" + this.engine.coin_flipper;
-		this.identify("building-tv-singleEpt").textContent = "1";
-		var tmp = this.engine.cost_second();
-		this.identify("building-tv-cost").textContent = "" + tmp;
-		this.identify("building-tv-ownedCount").textContent = "" + this.engine.blg_second;
-		this.identifyButton("building-flipper-buy").disabled = !this.engine.can_action("buy1");
-		this.identifyButton("building-tv-buy").disabled = !this.engine.can_action("buy2");
-		this.identifyButton("building-flipper-ff").disabled = this.engine.can_action("buy1");
-		this.identifyButton("building-tv-ff").disabled = this.engine.can_action("buy2");
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 		var tmp = this.fmtOneDecimalPointNumber(this.engine.entropy);
 		this.identify("dashboard-entropy").textContent = "" + tmp;
 		var tmp = this.fmtOneDecimalPointNumber(this.engine.eps);
@@ -494,7 +358,6 @@ GameLoop.prototype = {
 		if(this.engine.milestone_2 > 0) {
 			this.identify("milestone-2-progress").innerHTML = "Achieved @ Tick " + this.engine.milestone_2;
 		} else {
-<<<<<<< HEAD
 			var tmp = "Progress " + Math.round(this.engine.buildings.h[Defs.S_BLG_TV].count / 10 * 100);
 			this.identify("milestone-2-progress").innerHTML = tmp + "%";
 		}
@@ -503,10 +366,6 @@ GameLoop.prototype = {
 		} else {
 			var tmp = "Progress " + Math.round(this.engine.eps / 100 * 100);
 			this.identify("milestone-3-progress").innerHTML = tmp + "%";
-=======
-			var tmp = "Progress " + Math.round(this.engine.blg_second / 10 * 100);
-			this.identify("milestone-2-progress").innerHTML = tmp + "%";
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 		}
 		var time_indicator_degree = this.engine.ticks % 60 / 60 * 360;
 		this.identify("timectl-timeGraphic").setAttribute("style","width: fit-content;rotate:" + time_indicator_degree + "deg;");
@@ -518,10 +377,6 @@ GameLoop.prototype = {
 		this.identify("building-flipper-autobuyValue").textContent = " = " + tmp;
 		var tmp = this.engine.cells.h["autobuy_blg2"].execute(this.engine);
 		this.identify("building-tv-autobuyValue").textContent = " = " + tmp;
-<<<<<<< HEAD
-=======
-		haxe_Log.trace(1,{ fileName : "src/GameLoop.hx", lineNumber : 141, className : "GameLoop", methodName : "draw"});
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 	}
 	,clicked_step: function() {
 		this.engine.step();
@@ -680,7 +535,6 @@ Std.__name__ = true;
 Std.string = function(s) {
 	return js_Boot.__string_rec(s,"");
 };
-<<<<<<< HEAD
 var Television = function() {
 	this.longName = "Television";
 	this.shortName = Defs.S_BLG_TV;
@@ -695,8 +549,6 @@ Television.__super__ = Building;
 Television.prototype = $extend(Building.prototype,{
 	__class__: Television
 });
-=======
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 var ValueType = $hxEnums["ValueType"] = { __ename__:true,__constructs__:null
 	,TNull: {_hx_name:"TNull",_hx_index:0,__enum__:"ValueType",toString:$estr}
 	,TInt: {_hx_name:"TInt",_hx_index:1,__enum__:"ValueType",toString:$estr}
@@ -794,7 +646,6 @@ Type.enumParameters = function(e) {
 		return [];
 	}
 };
-<<<<<<< HEAD
 var UnnamedThirdBuilding = function() {
 	this.longName = "yet-unnamed third building";
 	this.shortName = Defs.S_BLG_3THIRD;
@@ -809,8 +660,6 @@ UnnamedThirdBuilding.__super__ = Building;
 UnnamedThirdBuilding.prototype = $extend(Building.prototype,{
 	__class__: UnnamedThirdBuilding
 });
-=======
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 var haxe_IMap = function() { };
 $hxClasses["haxe.IMap"] = haxe_IMap;
 haxe_IMap.__name__ = true;
@@ -5154,13 +5003,10 @@ var Bool = Boolean;
 var Class = { };
 var Enum = { };
 js_Boot.__toStr = ({ }).toString;
-<<<<<<< HEAD
 Defs.COST_GROWTH = 1.25;
 Defs.S_BLG_FLIPPER = "flipper";
 Defs.S_BLG_TV = "tv";
 Defs.S_BLG_3THIRD = "third";
-=======
->>>>>>> 94d27ae6b05f4b2fe9b6f66a9f61dae0399ae3fb
 hscript_Parser.p1 = 0;
 hscript_Parser.tokenMin = 0;
 hscript_Parser.tokenMax = 0;
