@@ -22,7 +22,7 @@ Building.prototype = {
 	}
 	,initialDraw: function(parent,engine,gl) {
 		var _gthis = this;
-		var str = "" + ("        <button id=\"building-" + this.shortName + "-buy\">Buy a " + this.longName + "</button>") + ("        <button id=\"building-" + this.shortName + "-ff\">fast forward to buying a " + this.longName + "</button>") + "        <p>" + ("          <span title=\"building_" + this.shortName + "_ept\">") + ("            Each " + this.longName + " gives <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-singleEpt\">0.1</span> EpT.") + "          </span>" + ("          <span title=\"building_" + this.shortName + "_count\">") + ("            You have <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-ownedCount\"></span>.") + "          </span>" + ("          <span title=\"building_" + this.shortName + "_cost\">") + ("            Cost: <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-cost\"></span>") + "          </span>" + "        </p>" + ("        <span>autobuy formula:</span><textarea id=\"building-" + this.shortName + "-autobuyFormula\" style=\"resize:both;display:block;\"></textarea> <span id=\"building-" + this.shortName + "-autobuyValue\"></span><br><br><br><br>");
+		var str = "" + ("        <button id=\"building-" + this.shortName + "-buy\">Buy a " + this.longName + "</button>") + ("        <button id=\"building-" + this.shortName + "-ff\">fast forward to buying a " + this.longName + "</button>") + "        <p>" + ("          <span title=\"" + this.shortName + "_ept\">") + ("            Each " + this.longName + " gives <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-singleEpt\">0.1</span> EpT.") + "          </span>" + ("          <span title=\"" + this.shortName + "_count\">") + ("            You have <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-ownedCount\"></span>.") + "          </span>" + ("          <span title=\"" + this.shortName + "_cost\">") + ("            Cost: <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-cost\"></span>") + "          </span>" + "        </p>" + ("        <span>autobuy formula:</span><textarea id=\"building-" + this.shortName + "-autobuyFormula\" style=\"resize:both;display:block;\"></textarea> <span id=\"building-" + this.shortName + "-autobuyValue\"></span><br><br><br><br>");
 		parent.innerHTML = str;
 		gl.identify("building-" + this.shortName + "-buy").onclick = function(event) {
 			gl.clicked_action("buy" + _gthis.index);
@@ -44,6 +44,9 @@ Building.prototype = {
 		gl.identify(tmp).textContent = "" + tmp1;
 		var tmp = engine.buildings.h[this.shortName];
 		gl.identify("building-" + this.shortName + "-ownedCount").textContent = "" + tmp.count;
+		var tmp = "building-" + this.shortName + "-autobuyValue";
+		var tmp1 = engine.cells.h["autobuy_blg" + this.index].execute(engine);
+		gl.identify(tmp).textContent = " = " + tmp1;
 		var tmp = "buy" + this.index;
 		gl.identifyButton("building-" + this.shortName + "-buy").disabled = !engine.can_action(tmp);
 		var tmp = "buy" + this.index;
@@ -80,12 +83,23 @@ Cell.prototype = {
 		while(build_current < build_length) {
 			var build = build_h[build_keys[build_current++]];
 			var this1 = this.interp.variables;
+			var key = "" + build.shortName + "_cost";
 			var value = build.cost();
-			this1.h["building_${build.shortName}_cost"] = value;
-			this.interp.variables.h["building_${build.shortName}_count"] = build.count;
+			this1.h[key] = value;
+			this.interp.variables.h["" + build.shortName + "_count"] = build.count;
 			var this2 = this.interp.variables;
+			var key1 = "" + build.shortName + "_ept";
 			var value1 = build.singleEpt();
-			this2.h["building_${build.shortName}_ept"] = value1;
+			this2.h[key1] = value1;
+		}
+		var h = this.interp.variables.h;
+		var v_h = h;
+		var v_keys = Object.keys(h);
+		var v_length = v_keys.length;
+		var v_current = 0;
+		while(v_current < v_length) {
+			var v = v_h[v_keys[v_current++]];
+			haxe_Log.trace(v,{ fileName : "src/Cell.hx", lineNumber : 35, className : "Cell", methodName : "execute"});
 		}
 		var result = this.interp.execute(this.ast);
 		if(Type.typeof(result) == ValueType.TFloat) {
@@ -373,10 +387,6 @@ GameLoop.prototype = {
 		this.identify("timectl-currTick").textContent = "" + tmp;
 		var tmp = this.time_autotick ? "Pause" : "Play";
 		this.identify("timectl-playPauseBtn").textContent = tmp;
-		var tmp = this.engine.cells.h["autobuy_blg1"].execute(this.engine);
-		this.identify("building-flipper-autobuyValue").textContent = " = " + tmp;
-		var tmp = this.engine.cells.h["autobuy_blg2"].execute(this.engine);
-		this.identify("building-tv-autobuyValue").textContent = " = " + tmp;
 	}
 	,clicked_step: function() {
 		this.engine.step();
