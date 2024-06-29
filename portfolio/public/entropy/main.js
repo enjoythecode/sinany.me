@@ -7,7 +7,9 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
-var Building = function() { };
+var Building = function(c) {
+	this.count = c.registerState("blg_" + this.shortName + "_count");
+};
 $hxClasses["Building"] = Building;
 Building.__name__ = true;
 Building.prototype = {
@@ -15,14 +17,14 @@ Building.prototype = {
 		return this.baseEpt;
 	}
 	,totalEpt: function() {
-		return this.singleEpt() * this.count;
+		return this.singleEpt() * this.count.get();
 	}
 	,cost: function() {
-		return Math.round(this.baseCost * Math.pow(Defs.COST_GROWTH,this.count));
+		return Math.round(this.baseCost * Math.pow(Defs.COST_GROWTH,this.count.get()));
 	}
 	,initialDraw: function(parent,engine,gl) {
 		var _gthis = this;
-		var str = "" + ("        <button id=\"building-" + this.shortName + "-buy\">Buy a " + this.longName + "</button>") + ("        <button id=\"building-" + this.shortName + "-ff\">fast forward to buying a " + this.longName + "</button>") + "        <p>" + ("          <span title=\"" + this.shortName + "_ept\">") + ("            Each " + this.longName + " gives <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-singleEpt\">0.1</span> EpT.") + "          </span>" + ("          <span title=\"" + this.shortName + "_count\">") + ("            You have <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-ownedCount\"></span>.") + "          </span>" + ("          <span title=\"" + this.shortName + "_cost\">") + ("            Cost: <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-cost\"></span>") + "          </span>" + "        </p>" + ("        <span>autobuy formula:</span><textarea id=\"building-" + this.shortName + "-autobuyFormula\" style=\"resize:both;display:block;\"></textarea> <span id=\"building-" + this.shortName + "-autobuyValue\"></span><br><br><br><br>");
+		var str = "" + ("        <button id=\"building-" + this.shortName + "-buy\">Buy a " + this.longName + "</button>") + ("        <button id=\"building-" + this.shortName + "-ff\">fast forward to buying a " + this.longName + "</button>") + "        <p>" + ("          <span title=\"" + this.shortName + "_ept\">") + ("            Each " + this.longName + " gives <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-singleEpt\">0.1</span> EpT.") + "          </span>" + ("          <span title=\"" + this.shortName + "_count\">") + ("            You have <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-ownedCount\"></span>.") + "          </span>" + ("          <span title=\"" + this.shortName + "_cost\">") + ("            Cost: <span class=\"autobuy-var\" id=\"building-" + this.shortName + "-cost\"></span>") + "          </span>" + "        </p><br><br>";
 		parent.innerHTML = str;
 		gl.identify("building-" + this.shortName + "-buy").onclick = function(event) {
 			gl.clicked_action("buy" + _gthis.index);
@@ -30,10 +32,19 @@ Building.prototype = {
 		gl.identify("building-" + this.shortName + "-ff").onclick = function(event) {
 			gl.clicked_ff_to_action("buy" + _gthis.index);
 		};
-		engine.cells.h["autobuy_blg" + this.index].parse(gl.identifyTextArea("building-" + this.shortName + "-autobuyFormula").value);
-		gl.identify("building-" + this.shortName + "-autobuyFormula").onblur = function(event) {
-			engine.cells.h["autobuy_blg" + _gthis.index].parse(gl.identifyTextArea("building-" + _gthis.shortName + "-autobuyFormula").value);
-		};
+		gl.js3_buildings.js3.setValue("A" + (this.index + 1),this.longName,true);
+		gl.js3_buildings.registerPretendVar("B" + (this.index + 1),function() {
+			return engine.buildings.h[_gthis.shortName].count.get();
+		});
+		gl.js3_buildings.registerPretendVar("C" + (this.index + 1),function() {
+			return _gthis.singleEpt() * engine.buildings.h[_gthis.shortName].count.get();
+		});
+		gl.js3_buildings.registerPretendVar("D" + (this.index + 1),function() {
+			return _gthis.singleEpt();
+		});
+		gl.js3_buildings.registerPretendVar("E" + (this.index + 1),function() {
+			return engine.buildings.h[_gthis.shortName].cost();
+		});
 	}
 	,draw: function(engine,gl) {
 		var tmp = "building-" + this.shortName + "-singleEpt";
@@ -42,15 +53,16 @@ Building.prototype = {
 		var tmp = "building-" + this.shortName + "-cost";
 		var tmp1 = engine.buildings.h[this.shortName].cost();
 		gl.identify(tmp).textContent = "" + tmp1;
-		var tmp = engine.buildings.h[this.shortName];
-		gl.identify("building-" + this.shortName + "-ownedCount").textContent = "" + tmp.count;
-		var tmp = "building-" + this.shortName + "-autobuyValue";
-		var tmp1 = engine.cells.h["autobuy_blg" + this.index].execute(engine);
-		gl.identify(tmp).textContent = " = " + tmp1;
+		var tmp = Std.string(engine.buildings.h[this.shortName].count);
+		gl.identify("building-" + this.shortName + "-ownedCount").textContent = "" + tmp;
 		var tmp = "buy" + this.index;
 		gl.identifyButton("building-" + this.shortName + "-buy").disabled = !engine.can_action(tmp);
 		var tmp = "buy" + this.index;
 		gl.identifyButton("building-" + this.shortName + "-ff").disabled = engine.can_action(tmp);
+		gl.js3_buildings.js3.setValue("B" + (this.index + 1),"" + Std.string(engine.buildings.h[this.shortName].count.get()),true);
+		gl.js3_buildings.js3.setValue("C" + (this.index + 1),"" + this.singleEpt() * engine.buildings.h[this.shortName].count.get(),true);
+		gl.js3_buildings.js3.setValue("D" + (this.index + 1),"" + this.singleEpt(),true);
+		gl.js3_buildings.js3.setValue("E" + (this.index + 1),"" + engine.buildings.h[this.shortName].cost(),true);
 	}
 	,__class__: Building
 };
@@ -62,19 +74,27 @@ $hxClasses["Cell"] = Cell;
 Cell.__name__ = true;
 Cell.prototype = {
 	parse: function(expr_) {
-		haxe_Log.trace(this.expr,{ fileName : "src/Cell.hx", lineNumber : 16, className : "Cell", methodName : "parse"});
 		this.expr = expr_;
 		this.ast = this.parser.parseString(this.expr);
 	}
-	,execute: function(engine) {
+	,execute: function(game,refs) {
+		var sureRefs = refs != null ? refs : [];
+		var engine = game.engine;
 		if(this.expr == "") {
 			return 0;
 		}
 		if(this.expr == null) {
 			return 0;
 		}
-		this.interp.variables.h["entropy"] = engine.entropy;
-		this.interp.variables.h["ept"] = engine.eps;
+		var this1 = this.interp.variables;
+		var value = engine.entropy.get();
+		this1.h["entropy"] = value;
+		this.interp.variables.h["resolve"] = function(refidx) {
+			return game.resolveSheetRef(sureRefs[refidx]);
+		};
+		var this1 = this.interp.variables;
+		var value = engine.ept.get();
+		this1.h["ept"] = value;
 		var h = engine.buildings.h;
 		var build_h = h;
 		var build_keys = Object.keys(h);
@@ -86,11 +106,14 @@ Cell.prototype = {
 			var key = "" + build.shortName + "_cost";
 			var value = build.cost();
 			this1.h[key] = value;
-			this.interp.variables.h["" + build.shortName + "_count"] = build.count;
 			var this2 = this.interp.variables;
-			var key1 = "" + build.shortName + "_ept";
-			var value1 = build.singleEpt();
+			var key1 = "" + build.shortName + "_count";
+			var value1 = build.count.get();
 			this2.h[key1] = value1;
+			var this3 = this.interp.variables;
+			var key2 = "" + build.shortName + "_ept";
+			var value2 = build.singleEpt();
+			this3.h[key2] = value2;
 		}
 		var h = this.interp.variables.h;
 		var v_h = h;
@@ -99,7 +122,6 @@ Cell.prototype = {
 		var v_current = 0;
 		while(v_current < v_length) {
 			var v = v_h[v_keys[v_current++]];
-			haxe_Log.trace(v,{ fileName : "src/Cell.hx", lineNumber : 35, className : "Cell", methodName : "execute"});
 		}
 		var result = this.interp.execute(this.ast);
 		if(Type.typeof(result) == ValueType.TFloat) {
@@ -112,13 +134,14 @@ Cell.prototype = {
 	}
 	,__class__: Cell
 };
-var CoinFlipper = function() {
+var CoinFlipper = function(c) {
 	this.longName = "Coin Flipper";
 	this.shortName = Defs.S_BLG_FLIPPER;
 	this.index = 1;
 	this.baseCost = 15;
-	this.count = 0;
 	this.baseEpt = 0.1;
+	Building.call(this,c);
+	this.count.set(0);
 };
 $hxClasses["CoinFlipper"] = CoinFlipper;
 CoinFlipper.__name__ = true;
@@ -126,49 +149,155 @@ CoinFlipper.__super__ = Building;
 CoinFlipper.prototype = $extend(Building.prototype,{
 	__class__: CoinFlipper
 });
+var Core = function() {
+	this.values = new haxe_ds_StringMap();
+};
+$hxClasses["Core"] = Core;
+Core.__name__ = true;
+Core.prototype = {
+	get: function(key) {
+		return this.values.h[key].get();
+	}
+	,set: function(key,val) {
+		this.values.h[key].set(val);
+		return val;
+	}
+	,registerState: function(name) {
+		var ret = new CoreState(name);
+		if(Object.prototype.hasOwnProperty.call(this.values.h,name)) {
+			throw haxe_Exception.thrown("already registered");
+		}
+		this.values.h[name] = ret;
+		return ret;
+	}
+	,registerVar: function(name) {
+		var ret = new CoreVar(name);
+		if(Object.prototype.hasOwnProperty.call(this.values.h,name)) {
+			throw haxe_Exception.thrown("already registered");
+		}
+		this.values.h[name] = ret;
+		return ret;
+	}
+	,__class__: Core
+};
+var CoreThing = function(name_) {
+	this.name = name_;
+};
+$hxClasses["CoreThing"] = CoreThing;
+CoreThing.__name__ = true;
+CoreThing.prototype = {
+	get: function() {
+		return this.value;
+	}
+	,set: function(nvalue) {
+		haxe_Log.trace("SET " + this.name + " FROM " + Std.string(this.value) + " TO " + Std.string(nvalue),{ fileName : "src/Core.hx", lineNumber : 41, className : "CoreThing", methodName : "set"});
+		this.value = nvalue;
+	}
+	,toString: function() {
+		return this.value.toString();
+	}
+	,__class__: CoreThing
+};
+var CoreState = function(name_) {
+	CoreThing.call(this,name_);
+};
+$hxClasses["CoreState"] = CoreState;
+CoreState.__name__ = true;
+CoreState.__super__ = CoreThing;
+CoreState.prototype = $extend(CoreThing.prototype,{
+	__class__: CoreState
+});
+var CoreVar = function(name_) {
+	CoreThing.call(this,name_);
+};
+$hxClasses["CoreVar"] = CoreVar;
+CoreVar.__name__ = true;
+CoreVar.__super__ = CoreThing;
+CoreVar.prototype = $extend(CoreThing.prototype,{
+	__class__: CoreVar
+});
 var Defs = function() { };
 $hxClasses["Defs"] = Defs;
 Defs.__name__ = true;
-var Engine = function() {
-	this.eps = 0;
+var EReg = function(r,opt) {
+	this.r = new RegExp(r,opt.split("u").join(""));
+};
+$hxClasses["EReg"] = EReg;
+EReg.__name__ = true;
+EReg.prototype = {
+	match: function(s) {
+		if(this.r.global) {
+			this.r.lastIndex = 0;
+		}
+		this.r.m = this.r.exec(s);
+		this.r.s = s;
+		return this.r.m != null;
+	}
+	,matched: function(n) {
+		if(this.r.m != null && n >= 0 && n < this.r.m.length) {
+			return this.r.m[n];
+		} else {
+			throw haxe_Exception.thrown("EReg::matched");
+		}
+	}
+	,matchedRight: function() {
+		if(this.r.m == null) {
+			throw haxe_Exception.thrown("No string matched");
+		}
+		var sz = this.r.m.index + this.r.m[0].length;
+		return HxOverrides.substr(this.r.s,sz,this.r.s.length - sz);
+	}
+	,matchedPos: function() {
+		if(this.r.m == null) {
+			throw haxe_Exception.thrown("No string matched");
+		}
+		return { pos : this.r.m.index, len : this.r.m[0].length};
+	}
+	,__class__: EReg
+};
+var Engine = function(g) {
+	this.game = g;
+	this.core = new Core();
 	this.buildings = new haxe_ds_StringMap();
 	var this1 = this.buildings;
 	var k = Defs.S_BLG_FLIPPER;
-	var v = new CoinFlipper();
+	var v = new CoinFlipper(this.core);
 	this1.h[k] = v;
 	var this1 = this.buildings;
 	var k = Defs.S_BLG_TV;
-	var v = new Television();
+	var v = new Television(this.core);
 	this1.h[k] = v;
 	var this1 = this.buildings;
 	var k = Defs.S_BLG_3THIRD;
-	var v = new UnnamedThirdBuilding();
+	var v = new UnnamedThirdBuilding(this.core);
 	this1.h[k] = v;
-	this.entropy = this.buildings.h[Defs.S_BLG_FLIPPER].cost();
 	this.ticks = 0;
 	this.milestone_1 = -1;
 	this.milestone_2 = -1;
 	this.milestone_3 = -1;
 	this.cells = new haxe_ds_StringMap();
-	this.action("buy1");
+	this.entropy = this.core.registerState("entropy");
+	this.entropy.set(this.buildings.h[Defs.S_BLG_FLIPPER].cost());
+	this.ept = this.core.registerVar("ept");
+	this.ept.set(0);
 };
 $hxClasses["Engine"] = Engine;
 Engine.__name__ = true;
 Engine.prototype = {
 	step: function() {
 		this.ticks++;
-		this.entropy += this.eps;
+		this.entropy.set(this.entropy.get() + this.ept.get());
 		this.check_milestones();
 		this.check_autobuy();
 	}
 	,check_milestones: function() {
-		if(this.milestone_1 < 0 && this.eps >= 7) {
+		if(this.milestone_1 < 0 && this.ept.get() >= 7) {
 			this.milestone_1 = this.ticks;
 		}
-		if(this.milestone_2 < 0 && this.buildings.h[Defs.S_BLG_TV].count >= 10) {
+		if(this.milestone_2 < 0 && this.buildings.h[Defs.S_BLG_TV].count.get() >= 10) {
 			this.milestone_2 = this.ticks;
 		}
-		if(this.milestone_3 < 0 && this.eps >= 100) {
+		if(this.milestone_3 < 0 && this.ept.get() >= 100) {
 			this.milestone_3 = this.ticks;
 		}
 	}
@@ -185,12 +314,12 @@ Engine.prototype = {
 					ret = i;
 				}
 			}
-			haxe_Log.trace(max,{ fileName : "src/Engine.hx", lineNumber : 61, className : "Engine", methodName : "check_autobuy"});
-			haxe_Log.trace(ret,{ fileName : "src/Engine.hx", lineNumber : 62, className : "Engine", methodName : "check_autobuy"});
+			haxe_Log.trace(max,{ fileName : "src/Engine.hx", lineNumber : 70, className : "Engine", methodName : "check_autobuy"});
+			haxe_Log.trace(ret,{ fileName : "src/Engine.hx", lineNumber : 71, className : "Engine", methodName : "check_autobuy"});
 			return ret;
 		};
-		var vals = [];
 		while(true) {
+			var vals = [];
 			var h = this.buildings.h;
 			var blg_h = h;
 			var blg_keys = Object.keys(h);
@@ -198,16 +327,11 @@ Engine.prototype = {
 			var blg_current = 0;
 			while(blg_current < blg_length) {
 				var blg = blg_h[blg_keys[blg_current++]];
-				if(this.cells.h["autobuy_blg" + blg.index].expr == null) {
+				if(!this.game.js3_buildings.hasFormula(5,blg.index)) {
+					haxe_Log.trace("no autobuy bc no formula",{ fileName : "src/Engine.hx", lineNumber : 81, className : "Engine", methodName : "check_autobuy"});
 					return;
 				}
-				if(this.cells.h["autobuy_blg" + blg.index].expr.length == 0) {
-					return;
-				}
-				var val = this.cells.h["autobuy_blg" + blg.index].execute(this);
-				if(-0.00001 < val && val < 0.00001) {
-					return;
-				}
+				var val = this.game.js3_buildings.calcFormula(5,blg.index);
 				vals.push(val);
 			}
 			var idx = 1 + argmax(vals);
@@ -232,7 +356,7 @@ Engine.prototype = {
 		if(blg == null) {
 			return false;
 		}
-		return this.entropy >= this.buildings.h[blg].cost() - 0.0001;
+		return this.entropy.get() >= this.buildings.h[blg].cost() - 0.0001;
 	}
 	,action: function(act) {
 		if(!this.can_action(act)) {
@@ -252,30 +376,18 @@ Engine.prototype = {
 			return;
 		}
 		var build = this.buildings.h[blg];
-		this.entropy -= build.cost();
-		this.eps += build.singleEpt();
-		build.count++;
+		this.entropy.set(this.entropy.get() - build.cost());
+		this.ept.set(this.ept.get() + build.singleEpt());
+		build.count.set(build.count.get() + 1);
 		this.check_milestones();
 	}
 	,__class__: Engine
 };
 var GameLoop = function() {
-	this.time_autotick = true;
+	this.time_autotick = false;
 	this.last_autotick_tick = HxOverrides.now() / 1000;
 	this.ff_target = null;
-	this.engine = new Engine();
-	var h = this.engine.buildings.h;
-	var blg_h = h;
-	var blg_keys = Object.keys(h);
-	var blg_length = blg_keys.length;
-	var blg_current = 0;
-	while(blg_current < blg_length) {
-		var blg = blg_h[blg_keys[blg_current++]];
-		var this1 = this.engine.cells;
-		var k = "autobuy_blg" + blg.index;
-		var v = new Cell();
-		this1.h[k] = v;
-	}
+	this.engine = new Engine(this);
 	this.draw_initial();
 };
 $hxClasses["GameLoop"] = GameLoop;
@@ -298,8 +410,30 @@ GameLoop.prototype = {
 		}
 		throw haxe_Exception.thrown("expected " + id + " to be a TextAreaElement");
 	}
+	,resolveSheetRef: function(ref) {
+		if(ref == null) {
+			return -12345;
+		}
+		var sheet = ref.onSheet == "dashboard" ? this.js3_dashboard : this.js3_buildings;
+		var f = sheet.pretendVars.h[ref.fromCol.toUpperCase() + ref.fromRow.toString()];
+		if(f != null) {
+			return f();
+		}
+		return -99999;
+	}
 	,draw_initial: function() {
 		var _gthis = this;
+		this.js3_dashboard = new Sheet(this,"js3_dashboard",[2,3]);
+		this.js3_dashboard.js3.setValue("A1","Entropy",true);
+		this.js3_dashboard.js3.setValue("A2","EpT",true);
+		this.js3_dashboard.js3.setValue("A3","Tick",true);
+		this.js3_buildings = new Sheet(this,"js3_buildings",[6,4]);
+		this.js3_buildings.js3.setValue("A1","Building",true);
+		this.js3_buildings.js3.setValue("B1","Owned Count",true);
+		this.js3_buildings.js3.setValue("C1","Total EpT",true);
+		this.js3_buildings.js3.setValue("D1","Single EpT",true);
+		this.js3_buildings.js3.setValue("E1","Cost",true);
+		this.js3_buildings.js3.setValue("F1","Autobuy",true);
 		var h = this.engine.buildings.h;
 		var blg_h = h;
 		var blg_keys = Object.keys(h);
@@ -312,11 +446,24 @@ GameLoop.prototype = {
 			this.identify("buildings-container").appendChild(container);
 			blg.initialDraw(container,this.engine,this);
 		}
+		this.js3_buildings.js3.setWidth(0,200);
+		this.js3_dashboard.registerPretendVar("B1",function() {
+			return _gthis.engine.entropy.get();
+		});
+		this.js3_dashboard.registerPretendVar("B2",function() {
+			return _gthis.engine.ept.get();
+		});
+		this.js3_dashboard.registerPretendVar("B3",function() {
+			return _gthis.engine.ticks;
+		});
 		this.identify("timectl-stepOneTick").onclick = function(event) {
 			_gthis.clicked_step();
 		};
 		this.identify("timectl-playPauseBtn").onclick = function(event) {
 			_gthis.clicked_autotick();
+		};
+		this.identify("timectl-speedBtn").onclick = function(event) {
+			_gthis.clicked_speed();
 		};
 		this.game_loop_timer = new haxe_Timer(16);
 		this.game_loop_timer.run = $bind(this,this.game_loop_timer_tick);
@@ -341,6 +488,7 @@ GameLoop.prototype = {
 				if(this.engine.can_action(this.ff_target)) {
 					this.ff_target = null;
 					this.time_autotick = false;
+					this.draw();
 					return;
 				}
 				this.clicked_step();
@@ -357,28 +505,33 @@ GameLoop.prototype = {
 			var blg = blg_h[blg_keys[blg_current++]];
 			blg.draw(this.engine,this);
 		}
+		this.js3_dashboard.draw();
+		this.js3_buildings.draw();
 		var tmp = this.time_autotick ? "display:none;" : "";
 		this.identify("timectl-stepOneTick").setAttribute("style",tmp);
-		var tmp = this.fmtOneDecimalPointNumber(this.engine.entropy);
+		var tmp = this.fmtOneDecimalPointNumber(this.engine.entropy.get());
 		this.identify("dashboard-entropy").textContent = "" + tmp;
-		var tmp = this.fmtOneDecimalPointNumber(this.engine.eps);
+		var tmp = this.fmtOneDecimalPointNumber(this.engine.ept.get());
 		this.identify("dashboard-ept").textContent = "" + tmp;
+		this.js3_dashboard.js3.setValue("B1","" + this.fmtOneDecimalPointNumber(this.engine.entropy.get()),true);
+		this.js3_dashboard.js3.setValue("B2","" + this.fmtOneDecimalPointNumber(this.engine.ept.get()),true);
+		this.js3_dashboard.js3.setValue("B3","" + this.engine.ticks,true);
 		if(this.engine.milestone_1 > 0) {
 			this.identify("milestone-1-progress").innerHTML = "Achieved @ Tick " + this.engine.milestone_1;
 		} else {
-			var tmp = "Progress " + Math.round(this.engine.eps / 7 * 100);
+			var tmp = "Progress " + Math.round(this.engine.ept.get() / 7 * 100);
 			this.identify("milestone-1-progress").innerHTML = tmp + "%";
 		}
 		if(this.engine.milestone_2 > 0) {
 			this.identify("milestone-2-progress").innerHTML = "Achieved @ Tick " + this.engine.milestone_2;
 		} else {
-			var tmp = "Progress " + Math.round(this.engine.buildings.h[Defs.S_BLG_TV].count / 10 * 100);
+			var tmp = "Progress " + Math.round(this.engine.buildings.h[Defs.S_BLG_TV].count.get() / 10 * 100);
 			this.identify("milestone-2-progress").innerHTML = tmp + "%";
 		}
 		if(this.engine.milestone_3 > 0) {
 			this.identify("milestone-3-progress").innerHTML = "Achieved @ Tick " + this.engine.milestone_3;
 		} else {
-			var tmp = "Progress " + Math.round(this.engine.eps / 100 * 100);
+			var tmp = "Progress " + Math.round(this.engine.ept.get() / 100 * 100);
 			this.identify("milestone-3-progress").innerHTML = tmp + "%";
 		}
 		var time_indicator_degree = this.engine.ticks % 60 / 60 * 360;
@@ -387,6 +540,8 @@ GameLoop.prototype = {
 		this.identify("timectl-currTick").textContent = "" + tmp;
 		var tmp = this.time_autotick ? "Pause" : "Play";
 		this.identify("timectl-playPauseBtn").textContent = tmp;
+		var tmp = this.ff_target == null ? "Speed up" : "Slow down";
+		this.identify("timectl-speedBtn").textContent = tmp;
 	}
 	,clicked_step: function() {
 		this.engine.step();
@@ -405,6 +560,14 @@ GameLoop.prototype = {
 	}
 	,clicked_autotick: function() {
 		this.time_autotick = !this.time_autotick;
+		this.draw();
+	}
+	,clicked_speed: function() {
+		if(this.ff_target != null) {
+			this.ff_target = null;
+		} else {
+			this.ff_target = "invalid action so that we always keep going";
+		}
 		this.draw();
 	}
 	,fmtAccumulatedTicks: function(ticks) {
@@ -539,19 +702,135 @@ Reflect.makeVarArgs = function(f) {
 		return f(a2);
 	};
 };
+var Sheet = function(gl,id,mindim) {
+	this.game = gl;
+	this.formulas = new haxe_ds_StringMap();
+	this.pretendVars = new haxe_ds_StringMap();
+	this.referencesStore = new haxe_ds_StringMap();
+	this.htmlId = id;
+	this.js3 = new jspreadsheet(gl.identify(id),{ minDimensions : mindim, parseFormulas : false, secureFormula : false, defaultColWidth : 100, sorting : false, oneditionstart : $bind(this,this.oneditionstart), oneditionend : $bind(this,this.oneditionend)});
+};
+$hxClasses["Sheet"] = Sheet;
+Sheet.__name__ = true;
+Sheet.findReferences = function(formula) {
+	var regex = new EReg("([A-Za-z0-9]*)?!?(\\$?[A-Za-z]+)(\\$?[0-9]+):?(\\$?[A-Za-z]+)?(\\$?[0-9]+)?","g");
+	var remaining = formula;
+	var result = [];
+	var at = 0;
+	while(regex.match(remaining)) {
+		var mp = regex.matchedPos();
+		var os = regex.matched(1);
+		var fc = regex.matched(2).toUpperCase();
+		var fr = regex.matched(3).toUpperCase();
+		var tmp = regex.matched(4);
+		var tc = tmp != null ? tmp.toUpperCase() : null;
+		var tmp1 = regex.matched(5);
+		var tr = tmp1 != null ? tmp1.toUpperCase() : null;
+		result.push({ pos : at + mp.pos, len : mp.len, text : HxOverrides.substr(remaining,mp.pos,mp.len), onSheet : os, fromCol : fc, fromRow : fr, toCol : tc, toRow : tr, fromColAnchor : fc.indexOf("$") > -1, fromRowAnchor : fr.indexOf("$") > -1, toColAnchor : tc != null && (tc != null ? tc.indexOf("$") : null) > -1, toRowAnchor : tr != null && (tr != null ? tr.indexOf("$") : null) > -1});
+		remaining = regex.matchedRight();
+		at = mp.pos + mp.len;
+	}
+	return result;
+};
+Sheet.replaceReferencesWithResolveCalls = function(formula) {
+	var formulaCpy = formula;
+	var references = Sheet.findReferences(formulaCpy);
+	var result = "";
+	var at = 0;
+	var refidx = 0;
+	var _g = 0;
+	while(_g < references.length) {
+		var ref = references[_g];
+		++_g;
+		haxe_Log.trace(ref,{ fileName : "src/Sheet.hx", lineNumber : 99, className : "Sheet", methodName : "replaceReferencesWithResolveCalls"});
+		result += HxOverrides.substr(formula,at,ref.pos - at);
+		result += "resolve(" + refidx + ")";
+		at = ref.pos + ref.len;
+		haxe_Log.trace(result,{ fileName : "src/Sheet.hx", lineNumber : 105, className : "Sheet", methodName : "replaceReferencesWithResolveCalls"});
+		haxe_Log.trace(at,{ fileName : "src/Sheet.hx", lineNumber : 106, className : "Sheet", methodName : "replaceReferencesWithResolveCalls"});
+		++refidx;
+	}
+	haxe_Log.trace(formula.length,{ fileName : "src/Sheet.hx", lineNumber : 109, className : "Sheet", methodName : "replaceReferencesWithResolveCalls"});
+	if(at < formula.length) {
+		haxe_Log.trace("ya",{ fileName : "src/Sheet.hx", lineNumber : 111, className : "Sheet", methodName : "replaceReferencesWithResolveCalls"});
+		result += HxOverrides.substr(formula,at,null);
+	}
+	return result;
+};
+Sheet.coord_int2str = function(x,y) {
+	return "" + String.fromCodePoint((64 + (x + 1))) + (y + 1);
+};
+Sheet.prototype = {
+	oneditionstart: function(sheet,cell,x,y) {
+		haxe_Log.trace("oneditionstart on " + this.htmlId + " " + x + " " + y,{ fileName : "src/Sheet.hx", lineNumber : 49, className : "Sheet", methodName : "oneditionstart"});
+	}
+	,registerPretendVar: function(key,f) {
+		this.pretendVars.h[key] = f;
+	}
+	,oneditionend: function(sheet,cell,x,y,newVal,save) {
+		haxe_Log.trace("oneditionend on " + this.htmlId + " " + x + " " + y + ". new value: " + newVal,{ fileName : "src/Sheet.hx", lineNumber : 123, className : "Sheet", methodName : "oneditionend"});
+		haxe_Log.trace("newVal is " + newVal,{ fileName : "src/Sheet.hx", lineNumber : 124, className : "Sheet", methodName : "oneditionend"});
+		haxe_Log.trace("newVallength is " + newVal.length,{ fileName : "src/Sheet.hx", lineNumber : 125, className : "Sheet", methodName : "oneditionend"});
+		if(newVal == "" || newVal == null) {
+			var this1 = this.formulas;
+			var key = Sheet.coord_int2str(x,y);
+			var _this = this1;
+			if(Object.prototype.hasOwnProperty.call(_this.h,key)) {
+				delete(_this.h[key]);
+			}
+			return;
+		}
+		var c = new Cell();
+		var key = Sheet.coord_int2str(x,y);
+		var newvalcopy = newVal;
+		var refs = Sheet.findReferences(newvalcopy);
+		var expr = Sheet.replaceReferencesWithResolveCalls(newVal);
+		this.formulas.h[key] = c;
+		this.referencesStore.h[key] = refs;
+		haxe_Log.trace("expr(after resolve calls) is " + expr,{ fileName : "src/Sheet.hx", lineNumber : 140, className : "Sheet", methodName : "oneditionend"});
+		c.parse(expr);
+		haxe_Log.trace("???",{ fileName : "src/Sheet.hx", lineNumber : 142, className : "Sheet", methodName : "oneditionend"});
+		var text = "" + c.execute(this.game,refs);
+		haxe_Log.trace("result is " + text,{ fileName : "src/Sheet.hx", lineNumber : 144, className : "Sheet", methodName : "oneditionend"});
+		cell.innerText = text;
+	}
+	,hasFormula: function(x,y) {
+		haxe_Log.trace(Sheet.coord_int2str(x,y),{ fileName : "src/Sheet.hx", lineNumber : 150, className : "Sheet", methodName : "hasFormula"});
+		var this1 = this.formulas;
+		var key = Sheet.coord_int2str(x,y);
+		return Object.prototype.hasOwnProperty.call(this1.h,key);
+	}
+	,calcFormula: function(x,y) {
+		var key = Sheet.coord_int2str(x,y);
+		return this.formulas.h[key].execute(this.game,this.referencesStore.h[key]);
+	}
+	,draw: function() {
+		var h = this.formulas.h;
+		var key_h = h;
+		var key_keys = Object.keys(h);
+		var key_length = key_keys.length;
+		var key_current = 0;
+		while(key_current < key_length) {
+			var key = key_keys[key_current++];
+			this.js3.setValue(key,"" + this.formulas.h[key].execute(this.game,this.referencesStore.h[key]),true);
+		}
+	}
+	,__class__: Sheet
+};
 var Std = function() { };
 $hxClasses["Std"] = Std;
 Std.__name__ = true;
 Std.string = function(s) {
 	return js_Boot.__string_rec(s,"");
 };
-var Television = function() {
+var Television = function(c) {
 	this.longName = "Television";
 	this.shortName = Defs.S_BLG_TV;
 	this.index = 2;
 	this.baseCost = 150;
-	this.count = 0;
 	this.baseEpt = 1;
+	Building.call(this,c);
+	this.count.set(0);
 };
 $hxClasses["Television"] = Television;
 Television.__name__ = true;
@@ -656,13 +935,14 @@ Type.enumParameters = function(e) {
 		return [];
 	}
 };
-var UnnamedThirdBuilding = function() {
+var UnnamedThirdBuilding = function(c) {
 	this.longName = "yet-unnamed third building";
 	this.shortName = Defs.S_BLG_3THIRD;
 	this.index = 3;
 	this.baseCost = 1200;
-	this.count = 0;
 	this.baseEpt = 8;
+	Building.call(this,c);
+	this.count.set(0);
 };
 $hxClasses["UnnamedThirdBuilding"] = UnnamedThirdBuilding;
 UnnamedThirdBuilding.__name__ = true;
