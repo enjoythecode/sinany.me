@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS and Time Capture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        #output {
+            width: 300px;
+            height: 100px;
+            margin: 10px 0;
+        }
+        #copyStatus {
+            display: none;
+            color: green;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Capture GPS and Time</h1>
+    <button id="getLocation">Get Location and Time</button>
+    <textarea id="output" readonly></textarea>
+    <button id="copyButton">Copy to Clipboard</button>
+    <span id="copyStatus">🐱 Done!</span>
+
+    <script>
+        document.getElementById('getLocation').addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const currentTime = new Date();
+                    const militaryTime = currentTime.getHours() * 100 + currentTime.getMinutes(); // HHMM format
+                    const result = `LL ${latitude},${longitude}\n${militaryTime}`;
+                    document.getElementById('output').value = result;
+                }, () => {
+                    alert("Unable to retrieve your location.");
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        });
+
+        document.getElementById('copyButton').addEventListener('click', () => {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            
+            const copyStatus = document.getElementById('copyStatus');
+            copyStatus.style.display = 'inline'; // Show the status
+            setTimeout(() => {
+                copyStatus.style.display = 'none'; // Hide after 2 seconds
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>
