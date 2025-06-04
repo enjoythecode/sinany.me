@@ -1,120 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title></title>
-    <style>
-      /* Thanks to background reader extension on my browser. */
-      :root {
-        background-color: #131516;
-        color: #d8d4cf;
-        font-family: arial;
-      }
-      .autobuy-var {
-        border-bottom: 1px dotted #fff;
-        text-decoration: none;
-      }
 
-      tbody > tr td {
-        border: 0.5px solid #eee !important;
-      }
-      thead > tr td {
-        border: 0.5px solid #ccc !important;
-      }
-    </style>
-    <script src="js3/index.js"></script>
-    <script src="js3/jsuites.js"></script>
-    <link rel="stylesheet" href="js3/jsuites.css" type="text/css" />
-    <link rel="stylesheet" href="js3/jspreadsheet.css" type="text/css" />
-    <link rel="stylesheet" href="js3/jspreadsheet.datatables.css" type="text/css" />
-    <link rel="stylesheet" href="js3/jspreadsheet.theme.css" type="text/css" />
-  </head>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon-CBaW1N4E.ico">
+  <title>Entropy!? by sunny</title>
+  <style>
+    /* Thanks to background reader extension on my browser. */
+    :root {
+      background-color: #181a1b;
+      color: #d8d4cf;
+      font-family: arial;
+    }
+
+    .autobuy-var {
+      border-bottom: 1px dotted #fff;
+      text-decoration: none;
+    }
+
+    table {
+      font-size: 13px;
+    }
+  </style>
+
+  <script type="module" crossorigin src="/assets/index-BJ2rnZHW.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DGFKgHOg.css">
+</head>
+
 <body>
 
-  <!-- TODO prevent sorting -->
-  <!-- TODO better column widths -->
-  <!-- TODO table titles -->
-  <!-- TODO read only -->
-  <!-- TODO prevent add/remove columns -->
-  <div>
-    <div id="js3_dashboard"></div>
-    <b>dashboard</b>
-  </div>
-  <br>
-  <div>
-    <div id="js3_buildings"></div>
-    <b>buildings</b>
-  </div>
-  <div id=""></div>
-  <script>
-  </script>
-  <hr/>
-    
-  <p title="entropy" >Entropy: <span class="autobuy-var" id="dashboard-entropy"></span> </p>
-  <span title="ept">Entropy per Tick (EpT): <span class="autobuy-var" id="dashboard-ept"></span></span>
-  
-  <hr>
+  <div id="app">
 
-  <span id="timectl-currTick"></span>
-  <div id="timectl-timeGraphic">|</div>
-  <button id="timectl-playPauseBtn">Play</button>
-  <button id="timectl-speedBtn">Faster</button>
-  <button id="timectl-stepOneTick">Step 1 tick</button>
-  
-  <hr>
+    <button id="debugBtn">debug</button>
 
-  <div id="buildings-container"></div>
+    <div id="displayed-container-selector">
+      <!-- 
+      TODO
+      <button id="saveManualBtn">Export Save</button>
+      <button id="loadManualBtn">Import Save</button>
+      <button id="saveLocalStorageBtn">Save to browser</button>
+      <button id="loadLocalStorageBtn">Load from browser</button>
+      <button id="wipeSaveBtn">Wipe Save</button>
+      <button id="startFromScratchBtn">Start from the Beginning (keeps rules and snapshots)</button>
+       -->
+    </div>
 
-  <hr/>
+    <div id="container-game" class="container">
+      <!-- <div style="margin: auto; max-width: fit-content; text-align: center;">
+        <p style="font-size: 1.2em;">You have
+          <span title="entropy" style="font-size: 1.8em;">
+            <span id="dashboard-entropy"></span><span class="entropy-sign">¿</span>
+            <span style="font-size: 0.9em;"> Entropy</span>
+          </span>
+          <br>
+          <spantitle="ept">and you gain <span style="font-size: 1.4rem;" id="dashboard-ept"></span><span class="entropy-sign">¿</span> per <span class="tick-sign">ƨ</span> (aka "<span class="entropy-sign">¿</span>/ƨ").</span>
+        </p>
+      </div> -->
+      <!-- <div style="font-size: 1.2em; margin: auto; margin-top: 2rem; max-width: fit-content; text-align: center;"> -->
+      <!-- <p> 
+          You sense it has been <span style="font-size:1.5rem;" id="timectl-currTick"></span> since you became lucid,
+        </p> -->
+      <!-- <div id="timectl-timeGraphic">|</div> -->
+      <!-- You feel you can  -->
+      <!-- <button style="font-size: 1.1rem; padding: 4px; margin-bottom: 6px;" id="timectl-playPauseBtn"></button> -->
+      <!-- the flow of time
+        and command it to be -->
+      <!-- at  -->
 
-  <h2>Milestones</h2>
-  <div>1. Have 7 Entropy per Tick (EpT) -- <span id="milestone-1-progress"></span></div>
-  <div>2. Have 10 of Building 2 -- <span id="milestone-2-progress"></span></div>
-  <div>3. Have 100 Entropy per Tick (EpT) -- <span id="milestone-3-progress"></span></div>
+      <!-- <button style="font-size: 1.1rem; padding: 6px;" id="timectl-speedBtn"></button> -->
+      <!-- speed -->
+      <!-- <button id="timectl-stepOneTick">1 more ƨ</button> -->
+      <!-- </div> -->
 
-  <hr>
 
-    <p>
-      Thanks for checking out this prototype of my game "Entropy"! All feedback is wholeheartedly appreciated.
-<br><br>
-<b>Goal of the game:</b>
-      Achieve the milestones in as few ticks as possible.
-<br><br>
-      <b>Game explanation:</b>
-<br>
-      - Acquire "entropy" and use entropy to buy buildings that give you more of it.
-      <br>
-      - Put formulas in all autobuy cells to have the game automatically buy the building with the highest "autobuy value" when you can afford it.
-      <br>
-      - You can reference other cells and do computation. For example; "E2 / D2", "5 * dashboard!b1", etc.
-      <br>
-      - do not put an `=` in the front of the formula; everything is parsed as a "formula", even simple values such as "5".
-<br><br>
-      
-<b>Known issues and bugs:</b>
-      <br>
-      - Interaction with sheets are unpolished:
-      <br>
-      - trying to edit cells while game is running breaks sheets
-      <br>
-      - sorting breaks sheets
+
+
+      <br style="margin-top:2rem">
+
+      <hr>
+
+      <!-- <h2>Goal</h2>
+      <div>Have <span id="game-goal-entropy"></span> entropy in your bank at once. <span id="goal-progress"></span></div> -->
+    </div>
+
+
+    <!-- 
+    <div id="container-about" class="container">
+
+      <p>
+        Thanks for checking out this prototype of my game "Entropy"! All feedback is wholeheartedly appreciated.
+        <br><br>
+        <b>Goal of the game:</b>
+        Achieve the milestones in as few ticks as possible.
+        <br><br>
+        <b>Game explanation:</b>
         <br>
-        - columns can't be fit to content width by double clicking
+        - Acquire "entropy" and use entropy to buy buildings that give you more of it.
+        <br>
+        - Put formulas in all autobuy cells to have the game automatically buy the building with the highest "autobuy
+        value" when you can afford it.
+        <br>
+        - You can reference other cells and use arithmetic. For example; "E2 / D2", "5 * Entropy:Dashboard!B1", etc.
+        <br>
+        - do not put an `=` in the front of the formula; everything is parsed as a "formula", even simple values such as
+        "5".
+        <br><br>
 
-<br>
-<br>
-<b>Roadmap:</b>
-<br>
-- Savefiles so you don't have to re-write formulas everytime
+        <br>
+        <br>
+      </p>
+    </div> -->
 
-    </p>
+    <div id="sheets-ironcalc">
+    </div>
 
-  <hr>
-
-  <div>
-    <a href="./DOCS.md#Autobuy">autobuy docs</a>
   </div>
 
-  <script src="main.js"></script>
+
+  <script>
+    const containers = document.querySelectorAll(".container");
+
+    function showOnlyContainer(target) {
+      containers.forEach((el) => el.style.display = 'none');
+      document.getElementById(target).style.display = 'block';
+    }
+
+    showOnlyContainer("container-game");
+  </script> <!-- Haxe stuff -->
 </body>
+
 </html>

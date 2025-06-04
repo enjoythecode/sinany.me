@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      /* Thanks to background reader extension on my browser. */
+      :root {
+        background-color: #131516;
+        color: #d8d4cf;
+        font-family: arial;
+      }
+      .autobuy-var {
+        border-bottom: 1px dotted #fff;
+        text-decoration: none;
+      }
+
+      tbody > tr td {
+        border: 0.5px solid #eee !important;
+      }
+      thead > tr td {
+        border: 0.5px solid #ccc !important;
+      }
+    </style>
+    <script src="js3/index.js"></script>
+    <script src="js3/jsuites.js"></script>
+    <link rel="stylesheet" href="js3/jsuites.css" type="text/css" />
+    <link rel="stylesheet" href="js3/jspreadsheet.css" type="text/css" />
+    <link rel="stylesheet" href="js3/jspreadsheet.datatables.css" type="text/css" />
+    <link rel="stylesheet" href="js3/jspreadsheet.theme.css" type="text/css" />
+  </head>
+<body>
+
+  <!-- TODO prevent sorting -->
+  <!-- TODO better column widths -->
+  <!-- TODO table titles -->
+  <!-- TODO read only -->
+  <!-- TODO prevent add/remove columns -->
+  <div>
+    <div id="js3_dashboard"></div>
+    <b>dashboard</b>
+  </div>
+  <br>
+  <div>
+    <div id="js3_buildings"></div>
+    <b>buildings</b>
+  </div>
+  <div id=""></div>
+  <script>
+  </script>
+  <hr/>
+    
+  <p title="entropy" >Entropy: <span class="autobuy-var" id="dashboard-entropy"></span> </p>
+  <span title="ept">Entropy per Tick (EpT): <span class="autobuy-var" id="dashboard-ept"></span></span>
+  
+  <hr>
+
+  <span id="timectl-currTick"></span>
+  <div id="timectl-timeGraphic">|</div>
+  <button id="timectl-playPauseBtn">Play</button>
+  <button id="timectl-speedBtn">Faster</button>
+  <button id="timectl-stepOneTick">Step 1 tick</button>
+  
+  <hr>
+
+  <div id="buildings-container"></div>
+
+  <hr/>
+
+  <h2>Milestones</h2>
+  <div>1. Have 7 Entropy per Tick (EpT) -- <span id="milestone-1-progress"></span></div>
+  <div>2. Have 10 of Building 2 -- <span id="milestone-2-progress"></span></div>
+  <div>3. Have 100 Entropy per Tick (EpT) -- <span id="milestone-3-progress"></span></div>
+
+  <hr>
+
+    <p>
+      Thanks for checking out this prototype of my game "Entropy"! All feedback is wholeheartedly appreciated.
+<br><br>
+<b>Goal of the game:</b>
+      Achieve the milestones in as few ticks as possible.
+<br><br>
+      <b>Game explanation:</b>
+<br>
+      - Acquire "entropy" and use entropy to buy buildings that give you more of it.
+      <br>
+      - Put formulas in all autobuy cells to have the game automatically buy the building with the highest "autobuy value" when you can afford it.
+      <br>
+      - You can reference other cells and do computation. For example; "E2 / D2", "5 * dashboard!b1", etc.
+      <br>
+      - do not put an `=` in the front of the formula; everything is parsed as a "formula", even simple values such as "5".
+<br><br>
+      
+<b>Known issues and bugs:</b>
+      <br>
+      - Interaction with sheets are unpolished:
+      <br>
+      - trying to edit cells while game is running breaks sheets
+      <br>
+      - sorting breaks sheets
+        <br>
+        - columns can't be fit to content width by double clicking
+
+<br>
+<br>
+<b>Roadmap:</b>
+<br>
+- Savefiles so you don't have to re-write formulas everytime
+
+    </p>
+
+  <hr>
+
+  <div>
+    <a href="./DOCS.md#Autobuy">autobuy docs</a>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

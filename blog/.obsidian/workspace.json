@@ -1,0 +1,173 @@
+{
+  "main": {
+    "id": "9271b15b2c4503ac",
+    "type": "split",
+    "children": [
+      {
+        "id": "51a33ba4002d4a82",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "52016f6c35e81b4d",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2b57cb40a7cd1c64",
+    "type": "split",
+    "children": [
+      {
+        "id": "1da4b7ee3b0449b2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d6cbf01f4502016b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "1f23cc336e53a265",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "e6caf3fa7297116e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "01656f35c001617f",
+    "type": "split",
+    "children": [
+      {
+        "id": "5593fb5283e2c4c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "72c163bcd3c94aab",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "cb12eae01ff4f012",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "41104c9c53edc7b9",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "7edaf0d9470be4e6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {},
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "52016f6c35e81b4d",
+  "lastOpenFiles": [
+    "maker stuff.md",
+    "attachments/EOj347eUYAE4bZu.jpg",
+    "attachments/Screenshot_20250123-210624.png",
+    "attachments/PXL_20250124_033815181.jpg",
+    "attachments/PXL_20250124_162010190.jpg",
+    "attachments/PXL_20250124_163548445.jpg",
+    "attachments/PXL_20250124_184831835.jpg",
+    "attachments/Pasted image 20250125122014.png",
+    "attachments/Pasted image 20250125122029.png",
+    "attachments",
+    "maker motivation.md",
+    "maker ideas.md",
+    "maker wishlist.md"
+  ]
+}
